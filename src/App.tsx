@@ -5,9 +5,7 @@ function App() {
   return (
     <div className="App">
       <MyNavbar/>
-      <Buttons text='Click me '/>
-      <Buttons text='Click me 1'/>
-      <Buttons text='Click me 3'/>
+ 
     </div>
   );
 }
