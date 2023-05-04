@@ -1,9 +1,26 @@
-.nav-bar{
+.nav-bar {
     background-color: #FFC2C2;
-    padding-left:2rem ;
+    padding-left: 2rem;
 }
-.nav-bar :nth-child(1){
+
+.nav-bar :nth-child(1) {
     color: #FFFFFF;
     font-weight: bolder;
     cursor: pointer;
+}
+
+.btn {
+    background-color: #F3F3F3;
+    padding: 1rem;
+    margin: 0.5rem;
+    border: none;
+    color: #000000;
+
+
+}
+
+.main-btns {
+    width: 50%;
+    display: flex;
+    align-items: center;
 }
