@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import StudentEvaluationPage from './pages/Student-Evaluation/StudentEvaluation.page';
@@ -9,6 +10,9 @@ import MyNavbar from './components/common/nav';
 import HomePage from './pages/Home/Home.pages';
 
 import './App.css';
+
+import Buttons from './components/common/buttons/buttons';
+import MyNavbar from './components/common/nav-bar/nav';
 
 function App() {
   return (
@@ -24,6 +28,7 @@ function App() {
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
         </Routes>
       </BrowserRouter>
+ 
     </div>
   );
 }
