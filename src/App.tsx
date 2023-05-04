@@ -1,23 +1,20 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import StudentEvaluationPage from './pages/Student-Evaluation/StudentEvaluation.page';
-import EvaluationPage from './pages/Evaluation/Evaluation.page';
-import GroupsPage from './pages/Groups/Groups.pages';
-import SignInPage from './pages/SignIn/SignIn.page';
-import FormsPage from './pages/Forms/Forms.page';
-import MyNavbar from './components/common/nav';
-import HomePage from './pages/Home/Home.pages';
+import StudentEvaluationPage from './pages/student-evaluation/student-evaluation.page';
+import EvaluationPage from './pages/evaluation/evaluation.page';
+import MyNavbar from './components/common/nav-bar/nav';
+import GroupsPage from './pages/groups/groups.pages';
+import SignInPage from './pages/sign-in/sign-in.page';
+import FormsPage from './pages/forms/forms.page';
+import HomePage from './pages/home/home.pages';
 
 import './App.css';
 
-import Buttons from './components/common/buttons/buttons';
-import MyNavbar from './components/common/nav-bar/nav';
 
 function App() {
   return (
     <div className="App">
-      <MyNavbar />
+      <MyNavbar/>
       <BrowserRouter>
         <Routes>
           <Route path="/Home" element={<HomePage />} />
