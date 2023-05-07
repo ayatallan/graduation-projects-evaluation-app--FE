@@ -23,7 +23,7 @@ function App() {
       <MyNavbar />
       <BrowserRouter>
         <Routes>
-          <Route path="/Home" element={<HomePage />} />
+          <Route path="/Home" element={<HomePage path={Path}/>} />
           <Route path="/" element={<HomePage />} />
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
