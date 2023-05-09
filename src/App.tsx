@@ -17,10 +17,13 @@ function App() {
     setInitialLocation(window.location.pathname);
   }, []);
   const Path: String = `${initialLocation}`;
-
+  console.log(Path);
+  
   return (
     <div className="App">
-      <MyNavbar />
+      { Path !== "/SignIn" &&
+        <MyNavbar />
+      }
       <BrowserRouter>
         <Routes>
           <Route path="/Home" element={<HomePage path={Path}/>} />
