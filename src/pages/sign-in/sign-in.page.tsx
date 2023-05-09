@@ -1,9 +1,15 @@
-import React from 'react'
+import './sign-in.css'
 
-const SignInPage = () => {
+const SignInPage = (props : any) => {
+  
   return (
-    <div>
-      Sign in Page
+    <div className="container1">
+      <div className="ImageSignUpPage">
+        <img src="logo.png" alt="ppu" />
+      </div>
+      <div className="SignUpButton">
+
+      </div>
     </div>
   )
 }
