@@ -18,16 +18,14 @@ function App() {
   }, []);
   const Path: String = `${initialLocation}`;
   console.log(Path);
-  
+
   return (
     <div className="App">
-      { Path !== "/SignIn" &&
-        <MyNavbar />
-      }
       <BrowserRouter>
+      <MyNavbar />
         <Routes>
-          <Route path="/Home" element={<HomePage path={Path}/>} />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/Home" element={<HomePage path={Path} />} />
+          <Route path="/" element={<SignInPage />} />
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
           <Route path="/Forms" element={<FormsPage path={Path} />} />
