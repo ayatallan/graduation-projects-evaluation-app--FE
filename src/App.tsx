@@ -10,6 +10,7 @@ import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation
 
 import './App.css';
 import { useEffect, useState } from 'react';
+import Quiz from './components/common/questions/question';
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
           <Route path="/Forms" element={<FormsPage path={Path} />} />
+          <Route path="/Questions" element={<Quiz path={Path}  />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
         </Routes>

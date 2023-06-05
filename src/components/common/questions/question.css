@@ -1,0 +1,53 @@
+/* Import Bootstrap CSS */
+@import '~bootstrap/dist/css/bootstrap.css';
+
+/* Customize styles for your quiz app */
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.quiz-container h2 {
+  text-align: center;
+}
+
+.quiz-container h3 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.quiz-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.quiz-container ul li {
+  margin-bottom: 10px;
+}
+
+.quiz-container ul li label {
+  cursor: pointer;
+}
+
+.quiz-container .selected-option {
+  background-color: rgb(165, 161, 161);
+}
+
+.quiz-container button {
+  margin-top: 20px;
+  margin-right: 1rem;
+  padding: .5rem 2rem;
+  background-color: #ffc2c2;
+  cursor: pointer;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+}
+.quiz-container button:hover{
+    background-color: rgb(102, 98, 98);
+}
+.quiz-container .score {
+  margin-top: 20px;
+  text-align: center;
+}
