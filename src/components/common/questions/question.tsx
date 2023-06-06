@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./question.css";
+import { IoIosCreate } from 'react-icons/io';
 
 interface QuizQuestion {
     question: string;
@@ -14,16 +15,17 @@ const Quiz = (props: any) => {
     const [quizData, setQuizData] = useState<QuizQuestion[]>([
         {
             question: "Abstract:",
-            options: ["A", "B", "C", "D"],
+            options: ["Contains clear motivation, scope,methodology, and conclusion", "Contains most of them in a clear way",
+                "Contains some of them or not clear enough", "Totally not clear or does not contain any of them"],
             answer: 0,
         },
         {
-            question: "Rubric:",
+            question: "Introduction:",
             options: ["A", "B", "C", "D"],
             answer: 1,
         },
         {
-            question: "intro:",
+            question: "Functional Requirements:",
             options: ["A", "B", "C", "D"],
             answer: 2,
         },
@@ -133,7 +135,13 @@ const Quiz = (props: any) => {
                     </div>
                 ) : (
                     <div>
-                        <h3>{currentQuizQuestion.question}</h3>
+                        <h3 className="quiz-question">
+                            <IoIosCreate size={30} onClick={() => handleEditClick(currentQuestion)} />
+                            <span className="question-text">{currentQuizQuestion.question}</span>
+
+                        </h3>
+
+
                         <ul>
                             {currentQuizQuestion.options.map((option, index) => (
                                 <li
@@ -155,10 +163,13 @@ const Quiz = (props: any) => {
                         </ul>
                     </div>
                 )}
-                <div>
-                    <button onClick={handlePrevious} disabled={currentQuestion === 0}>
-                        {currentQuestion === 0 ? "Start" : "Previous"}
-                    </button>
+                <div className="pre-next">
+                    {currentQuestion !== 0 && (
+                        <button onClick={handlePrevious} disabled={currentQuestion === 0}>
+                         Previous
+                        </button>
+                    )}
+
                     {currentQuestion === quizData.length - 1 ? (
                         <button onClick={handleNext}>Submit</button>
                     ) : (
@@ -167,12 +178,13 @@ const Quiz = (props: any) => {
                         </button>
                     )}
                 </div>
-                <div>
+                {/* <div>
                     Score: {score} / {quizData.length}
-                </div>
-                <div>
-                    <button onClick={() => handleEditClick(currentQuestion)}>Edit Question</button>
-                
+                </div> */}
+                <div >
+
+
+                    {/* ****************************** */}
                 </div>
             </div>
         </>

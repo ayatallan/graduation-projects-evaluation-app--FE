@@ -3,14 +3,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
 import FormsPage from './pages/forms/forms.page';
-import HomePage from './pages/Home/Home.pages';
-import GroupsPage from './pages/Groups/Groups.pages';
-import EvaluationPage from './pages/Evaluation/Evaluation.page';
-import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
 
 import './App.css';
 import { useEffect, useState } from 'react';
 import Quiz from './components/common/questions/question';
+import HomePage from './pages/home/Home.pages';
+import GroupsPage from './pages/groups/Groups.pages';
+import EvaluationPage from './pages/evaluation/Evaluation.page';
+import StudentEvaluationPage from './pages/student-evaluation/student-evaluation.page';
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
 
