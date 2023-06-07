@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./question.css";
 import { IoIosCreate } from 'react-icons/io';
+import { QuizData } from './dataQ';
 
 interface QuizQuestion {
     question: string;
@@ -8,29 +9,12 @@ interface QuizQuestion {
     answer: number;
 }
 
-const Quiz = (props: any) => {
+const SoftwareReport = (props: any) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [score, setScore] = useState(0);
-    const [quizData, setQuizData] = useState<QuizQuestion[]>([
-        {
-            question: "Abstract:",
-            options: ["Contains clear motivation, scope,methodology, and conclusion", "Contains most of them in a clear way",
-                "Contains some of them or not clear enough", "Totally not clear or does not contain any of them"],
-            answer: 0,
-        },
-        {
-            question: "Introduction:",
-            options: ["A", "B", "C", "D"],
-            answer: 1,
-        },
-        {
-            question: "Functional Requirements:",
-            options: ["A", "B", "C", "D"],
-            answer: 2,
-        },
-        // Add more quiz questions here
-    ]);
+    const [quizData, setQuizData] = useState<QuizQuestion[]>(QuizData);
+
     const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
     const [newQuestionText, setNewQuestionText] = useState("");
     const [newOptions, setNewOptions] = useState<string[]>([]);
@@ -117,7 +101,7 @@ const Quiz = (props: any) => {
                         />
                         <ul>
                             {newOptions.map((option, index) => (
-                                <li key={index}>
+                                <li key={index+1}>
                                     <input
                                         type="text"
                                         value={option}
@@ -145,7 +129,7 @@ const Quiz = (props: any) => {
                         <ul>
                             {currentQuizQuestion.options.map((option, index) => (
                                 <li
-                                    key={index}
+                                    key={index+1}
                                     className={selectedOption === index ? "selected-option" : ""}
                                     onClick={() => handleOptionSelect(index)}
                                 >
@@ -191,4 +175,4 @@ const Quiz = (props: any) => {
     );
 };
 
-export default Quiz;
+export default SoftwareReport;

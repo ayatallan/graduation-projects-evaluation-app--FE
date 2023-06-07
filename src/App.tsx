@@ -6,11 +6,12 @@ import FormsPage from './pages/forms/forms.page';
 
 import './App.css';
 import { useEffect, useState } from 'react';
-import Quiz from './components/common/questions/question';
-import HomePage from './pages/home/Home.pages';
-import GroupsPage from './pages/groups/Groups.pages';
-import EvaluationPage from './pages/evaluation/Evaluation.page';
-import StudentEvaluationPage from './pages/student-evaluation/student-evaluation.page';
+import HomePage from './pages/Home/Home.pages';
+import GroupsPage from './pages/Groups/Groups.pages';
+import EvaluationPage from './pages/Evaluation/Evaluation.page';
+import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
+import SoftwareReport from './components/common/questions/question';
+
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
 
@@ -29,7 +30,7 @@ function App() {
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
           <Route path="/Forms" element={<FormsPage path={Path} />} />
-          <Route path="/Questions" element={<Quiz path={Path}  />} />
+          <Route path="/Questions" element={<SoftwareReport path={Path}  />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
         </Routes>
