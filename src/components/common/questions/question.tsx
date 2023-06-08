@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import "./question.css";
 import { IoIosCreate } from 'react-icons/io';
 import { QuizData } from './dataQ';
+import {  useNavigate } from "react-router-dom";
 
 interface QuizQuestion {
     question: string;
     options: string[];
     answer: number;
 }
-
 const SoftwareReport = (props: any) => {
+    const navigate = useNavigate();
+
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [score, setScore] = useState(0);
@@ -61,6 +63,7 @@ const SoftwareReport = (props: any) => {
     const submitQuiz = () => {
         // Logic to handle quiz submission, e.g., show results or submit to server
         console.log("Quiz submitted!");
+        navigate("/Forms");
     };
 
     const handleEditClick = (questionIndex: number) => {
@@ -114,8 +117,8 @@ const SoftwareReport = (props: any) => {
                                 </li>
                             ))}
                         </ul>
-                        <button onClick={handleSaveEdit}>Save</button>
-                        <button onClick={handleCancelEdit}>Cancel</button>
+                        <button className="quizz-btn" onClick={handleSaveEdit}>Save</button>
+                        <button  className="quizz-btn" onClick={handleCancelEdit}>Cancel</button>
                     </div>
                 ) : (
                     <div>
@@ -149,15 +152,15 @@ const SoftwareReport = (props: any) => {
                 )}
                 <div className="pre-next">
                     {currentQuestion !== 0 && (
-                        <button onClick={handlePrevious} disabled={currentQuestion === 0}>
+                        <button className="quizz-btn" onClick={handlePrevious} disabled={currentQuestion === 0}>
                          Previous
                         </button>
                     )}
 
                     {currentQuestion === quizData.length - 1 ? (
-                        <button onClick={handleNext}>Submit</button>
+                        <button className="quizz-btn" onClick={handleNext}>Submit</button>
                     ) : (
-                        <button onClick={handleNext} disabled={selectedOption === null}>
+                        <button className="quizz-btn" onClick={handleNext} disabled={selectedOption === null}>
                             Next
                         </button>
                     )}

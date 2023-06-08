@@ -15,7 +15,7 @@ const FormsPage = (props: any) => {
 
 
         <Link to={'/Evaluation'}><Buttons text='Presentation '></Buttons></Link>
-        <Link to={'/Evaluation'}><Buttons text='Software report  '></Buttons></Link>
+        <Link to={'/Questions'}><Buttons text='Software report  '></Buttons></Link>
       </div>
     </>
 

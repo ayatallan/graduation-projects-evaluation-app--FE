@@ -35,6 +35,10 @@
 
 .quiz-container ul li input[type="radio"] {
   margin-right: 10px;
+
+    transform: scale(1.5);
+    margin-right: 10px;
+  
 }
 
 .quiz-container .selected-option {
@@ -48,7 +52,7 @@
   
 }
 
-.quiz-container button {
+.quizz-btn {
   margin-top: 20px;
   margin-right: 1rem;
   padding: .5rem 2rem;
@@ -60,7 +64,7 @@
   
 }
 
-button {
+.quizz-btn {
  width: 150px;
   border: none;
   text-align: center;
