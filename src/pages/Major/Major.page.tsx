@@ -29,7 +29,7 @@ const MajorPage = (props: any) => {
         <div className="row"><div className="col-sm-4 col-md-7"> <p>Select Majors that the team members belong to  : </p> </div></div>
         <div className="list-container">{checkList.map((item, index) => (
              <div key={index}>
-              <input value ={item} type='checkbox' onChange={HandleCheck}/>
+              <input className="checkbox-input" value ={item} type='checkbox' onChange={HandleCheck} />
               <span className={isChecked(item)}>{item}</span>
             </div>
 
