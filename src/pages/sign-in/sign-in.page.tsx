@@ -29,7 +29,7 @@ const SignInPage = (props: any) => {
         <img src="logo.png" alt="ppu" />
       </div>
       <div className="SignUpButton">
-        <GoogleLogin onSuccess={responseMessage} onError={() => errorMessage || undefined} />
+        <GoogleLogin  onSuccess={responseMessage} onError={() => errorMessage || undefined} />
       </div>
 
     </div>
