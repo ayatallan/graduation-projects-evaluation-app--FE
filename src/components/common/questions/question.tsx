@@ -40,7 +40,6 @@ const SoftwareReport = (props: any) => {
             setCurrentQuestion((prevQuestion) => prevQuestion + 1);
             setSelectedOption(null);
         } else {
-            // If it's the last question, submit the quiz or show a message
             submitQuiz();
         }
     };
@@ -61,7 +60,6 @@ const SoftwareReport = (props: any) => {
     };
 
     const submitQuiz = () => {
-        // Logic to handle quiz submission, e.g., show results or submit to server
         console.log("Quiz submitted!");
         navigate("/Forms");
     };
@@ -117,8 +115,8 @@ const SoftwareReport = (props: any) => {
                                 </li>
                             ))}
                         </ul>
-                        <button className="quizz-btn" onClick={handleSaveEdit}>Save</button>
-                        <button  className="quizz-btn" onClick={handleCancelEdit}>Cancel</button>
+                        <button className="quiz-btn" onClick={handleSaveEdit}>Save</button>
+                        <button  className="quiz-btn" onClick={handleCancelEdit}>Cancel</button>
                     </div>
                 ) : (
                     <div>
@@ -152,15 +150,15 @@ const SoftwareReport = (props: any) => {
                 )}
                 <div className="pre-next">
                     {currentQuestion !== 0 && (
-                        <button className="quizz-btn" onClick={handlePrevious} disabled={currentQuestion === 0}>
+                        <button className="quiz-btn" onClick={handlePrevious} disabled={currentQuestion === 0}>
                          Previous
                         </button>
                     )}
 
                     {currentQuestion === quizData.length - 1 ? (
-                        <button className="quizz-btn" onClick={handleNext}>Submit</button>
+                        <button className="quiz-btn" onClick={handleNext}>Submit</button>
                     ) : (
-                        <button className="quizz-btn" onClick={handleNext} disabled={selectedOption === null}>
+                        <button className="quiz-btn" onClick={handleNext} disabled={selectedOption === null}>
                             Next
                         </button>
                     )}

@@ -33,7 +33,7 @@ function App() {
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
           <Route path="/Forms" element={<FormsPage path={Path} />} />
-          <Route path="/Questions" element={<SoftwareReport quizData={RubricsHardware}  />} />
+          <Route path="/Questions" element={<SoftwareReport quizData={RubricsHardware}  path={Path}/>} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
         </Routes>
