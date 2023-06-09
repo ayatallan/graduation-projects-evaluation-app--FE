@@ -1,9 +1,8 @@
-
-export const RubricsIntroSoftware = [
+export const RubricPresentation = [
     {
       question: "Abstract:",
       options: [
-        "Contains clear motivation, scope, and methodology",
+        "Contains clear motivation, scope, methodology, and conclusion",
         "Contains most of them in a clear way",
         "Contains some of them or not clear enough",
         "Totally not clear or does not contain any of them"
@@ -56,17 +55,57 @@ export const RubricsIntroSoftware = [
         "The report presents a set of arguable alternatives and justification on the selected one",
         "The report presents limited arguable alternatives and justification on the selected one",
         "The justification is not rational",
-        "The report shows one and only one option throughout their work"
+        "The students show one and only one option throughout their work"
       ],
       answer: 0
     },
     {
-      question: "General Design consistency:",
+      question: "Design consistency:",
       options: [
         "The requirements are completely reflected in the design",
         "The requirements are mostly reflected in the design",
         "They are partially covered",
         "There is a major gap between design and requirements"
+      ],
+      answer: 0
+    },
+    {
+      question: "Modeling:",
+      options: [
+        "Systems, objects, or database are modeled effectively with the correct modeling approach and with enough justifications",
+        "The models are valid but with not enough justifications",
+        "The models contain some errors or there are no justifications",
+        "There is no modeling"
+      ],
+      answer: 0
+    },
+    {
+      question: "Demonstrations:",
+      options: [
+        "There is enough demonstration and explanation about how the system works",
+        "There is enough demonstration but the explanation is shallow",
+        "The demonstration is not enough",
+        "There are no demonstrations"
+      ],
+      answer: 0
+    },
+    {
+      question: "Testing:",
+      options: [
+        "Testing targets the core modules and includes the Test plan, test design specification, test case specification, test procedure",
+        "Testing targets core modules but is not sufficiently explained",
+        "Testing does not target core modules or is shallow",
+        "No testing"
+      ],
+      answer: 0
+    },
+    {
+      question: "Conclusion:",
+      options: [
+        "Conclusion includes summary of the delivered artifacts, challenges faced, interesting decisions, recommendations, and future releases",
+        "Conclusion includes summary of most of them",
+        "Conclusion includes summary of few of them",
+        "Conclusion does not include any of them"
       ],
       answer: 0
     },

@@ -15,7 +15,7 @@ const SoftwareReport = (props: any) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [score, setScore] = useState(0);
-    const [quizData, setQuizData] = useState<QuizQuestion[]>(QuizData);
+    const [quizData, setQuizData] = useState<QuizQuestion[]>(props.quizData);
 
     const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
     const [newQuestionText, setNewQuestionText] = useState("");
