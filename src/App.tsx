@@ -11,6 +11,9 @@ import GroupsPage from './pages/Groups/Groups.pages';
 import EvaluationPage from './pages/Evaluation/Evaluation.page';
 import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
 import SoftwareReport from './components/common/questions/question';
+import { QuizData } from './components/common/questions/dataQ';
+import { RubricsHardware } from './data/rubrics-hardware';
+
 
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
@@ -30,7 +33,7 @@ function App() {
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
           <Route path="/Forms" element={<FormsPage path={Path} />} />
-          <Route path="/Questions" element={<SoftwareReport path={Path}  />} />
+          <Route path="/Questions" element={<SoftwareReport quizData={RubricsHardware}  />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
         </Routes>
