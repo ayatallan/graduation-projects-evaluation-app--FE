@@ -1,7 +1,14 @@
-.mainDash{
-     display: flex;
-     flex-wrap: wrap;
+.mainDash {
+    display: flex;
+    flex-wrap: wrap;
 }
-.mainDash>* {
-    flex: 1 1 160px;
+
+.mainDash > main {
+    flex-grow: 1;
+}
+
+@media screen and (min-width: 701px) {
+    .mainDash>main {
+        margin-left: 200px;
+    }
 }

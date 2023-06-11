@@ -7,10 +7,12 @@ import HomePage from './pages/Home/Home.pages';
 import GroupsPage from './pages/Groups/Groups.pages';
 import EvaluationPage from './pages/Evaluation/Evaluation.page';
 import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
+import MainDashboard from './pages/AdminDashboard/main-admin-dashbored/mainDashboard.page';
+import StudentsPage from './pages/AdminDashboard/students/student.page';
 
 import './App.css';
 import { useEffect, useState } from 'react';
-import MainDashboard from './pages/AdminDashboard/main-admin-dashbored/mainDashboard.page';
+
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
 
@@ -31,7 +33,9 @@ function App() {
           <Route path="/Forms" element={<FormsPage path={Path} />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
-          <Route path="/AdminDashboard" element={<MainDashboard/>} />
+          <Route path="/AdminDashboard" element={<MainDashboard/>}>
+            <Route path="StudentsPage" element={<StudentsPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
 

@@ -1,13 +1,9 @@
+const StudentsPage = () => {
+  return (
+    <main >
+      <h1>StudentsPage</h1>
+    </main>
+  );
+};
 
-const StudentsPage= () => {
-    return (
-      <div >
-        
-
-  <div>StudentsPage</div>
-  
-      </div>
-    );
-  };
-  
-  export default StudentsPage ;
+export default StudentsPage;
