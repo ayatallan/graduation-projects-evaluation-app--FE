@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./question.css";
 import { IoIosCreate } from 'react-icons/io';
 import { QuizData } from './dataQ';
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface QuizQuestion {
     question: string;
@@ -55,6 +55,10 @@ const SoftwareReport = (props: any) => {
             const updatedData = [...prevQuizData];
             updatedData[questionIndex].question = newQuestionText;
             updatedData[questionIndex].options = newOptions;
+
+            // Update local storage
+            localStorage.setItem('quizData', JSON.stringify(updatedData));
+
             return updatedData;
         });
     };
@@ -62,6 +66,9 @@ const SoftwareReport = (props: any) => {
     const submitQuiz = () => {
         console.log("Quiz submitted!");
         navigate("/Forms");
+
+        // Update local storage with final quiz data
+        localStorage.setItem('quizData', JSON.stringify(quizData));
     };
 
     const handleEditClick = (questionIndex: number) => {
@@ -102,7 +109,7 @@ const SoftwareReport = (props: any) => {
                         />
                         <ul>
                             {newOptions.map((option, index) => (
-                                <li key={index+1}>
+                                <li key={index + 1}>
                                     <input
                                         type="text"
                                         value={option}
@@ -116,7 +123,7 @@ const SoftwareReport = (props: any) => {
                             ))}
                         </ul>
                         <button className="quiz-btn" onClick={handleSaveEdit}>Save</button>
-                        <button  className="quiz-btn" onClick={handleCancelEdit}>Cancel</button>
+                        <button className="quiz-btn" onClick={handleCancelEdit}>Cancel</button>
                     </div>
                 ) : (
                     <div>
@@ -130,7 +137,7 @@ const SoftwareReport = (props: any) => {
                         <ul>
                             {currentQuizQuestion.options.map((option, index) => (
                                 <li
-                                    key={index+1}
+                                    key={index + 1}
                                     className={selectedOption === index ? "selected-option" : ""}
                                     onClick={() => handleOptionSelect(index)}
                                 >
@@ -151,7 +158,7 @@ const SoftwareReport = (props: any) => {
                 <div className="pre-next">
                     {currentQuestion !== 0 && (
                         <button className="quiz-btn" onClick={handlePrevious} disabled={currentQuestion === 0}>
-                         Previous
+                            Previous
                         </button>
                     )}
 
