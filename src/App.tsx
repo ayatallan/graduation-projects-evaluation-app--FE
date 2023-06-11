@@ -10,6 +10,7 @@ import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation
 
 import './App.css';
 import { useEffect, useState } from 'react';
+import MainDashboard from './pages/AdminDashboard/main-admin-dashbored/mainDashboard.page';
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/Forms" element={<FormsPage path={Path} />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
+          <Route path="/AdminDashboard" element={<MainDashboard/>} />
         </Routes>
       </BrowserRouter>
 

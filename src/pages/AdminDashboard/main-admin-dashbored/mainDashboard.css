@@ -1,0 +1,7 @@
+.mainDash{
+     display: flex;
+     flex-wrap: wrap;
+}
+.mainDash>* {
+    flex: 1 1 160px;
+}
