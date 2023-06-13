@@ -26,9 +26,10 @@
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+  background-color: #eb646b;
+  color: rgb(126, 45, 45);
 }
+
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
@@ -54,4 +55,8 @@ div.content {
     text-align: center;
     float: none;
   }
+}
+.clicked{
+  background-color: #eb646b;
+  color: rgb(126, 45, 45);
 }
