@@ -1,6 +1,7 @@
 .mainDash {
     display: flex;
     flex-wrap: wrap;
+
 }
 
 .mainDash > main {
