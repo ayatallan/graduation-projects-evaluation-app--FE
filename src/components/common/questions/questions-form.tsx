@@ -29,6 +29,7 @@ const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
     };
 
     return (
+        <>
         <form className="form" onSubmit={handleSubmit}>
             <label className="form-label">
                 Question:
@@ -44,6 +45,7 @@ const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
             <br />
             <button className="form-button" type="submit">Submit</button>
         </form>
+            </>
     );
 };
 

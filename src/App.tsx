@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
@@ -11,8 +10,6 @@ import GroupsPage from './pages/Groups/Groups.pages';
 import EvaluationPage from './pages/Evaluation/Evaluation.page';
 import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
 import SoftwareReport from './components/common/questions/question';
-import { QuizData } from './components/common/questions/dataQ';
-import { RubricsHardware } from './data/rubrics-hardware';
 import QuestionsForm from './components/common/questions/questions-form';
 interface Question {
   question: string;
