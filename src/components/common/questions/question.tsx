@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "./question.css";
 import { IoIosCreate } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface QuizQuestion {
   question: string;
   options: string[];
   answer: number;
 }
-
 const SoftwareReport = (props: any) => {
   const navigate = useNavigate();
 
@@ -66,14 +65,13 @@ const SoftwareReport = (props: any) => {
         }
         return question;
       });
-  
+
       // Update local storage
-      localStorage.setItem("quizData", JSON.stringify(updatedData));
-  
+      localStorage.setItem("questions", JSON.stringify(updatedData));
+
       return updatedData;
     });
   };
-  
 
   const submitQuiz = () => {
     console.log("Quiz submitted!");
@@ -103,7 +101,6 @@ const SoftwareReport = (props: any) => {
       setNewOptions([]);
     }
   };
-  
 
   const currentQuizQuestion = quizData[currentQuestion];
 
@@ -112,80 +109,88 @@ const SoftwareReport = (props: any) => {
       <p className="path">{props.path}</p>
       <div className="quiz-container">
         <h2 className="project-name">Project Name</h2>
-        {editingQuestionIndex !== null ? (
-          <div>
-            <input
-              type="text"
-              value={newQuestionText}
-              onChange={(e) => setNewQuestionText(e.target.value)}
-            />
-            <ul>
-              {newOptions.map((option, index) => (
-                <li key={index + 1}>
-                  <input
-                    type="text"
-                    value={option}
-                    onChange={(e) => {
-                      const updatedOptions = [...newOptions];
-                      updatedOptions[index] = e.target.value;
-                      setNewOptions(updatedOptions);
-                    }}
-                  />
-                </li>
-              ))}
-            </ul>
-            <button className="quiz-btn" onClick={handleSaveEdit}>
-              Save
-            </button>
-            <button className="quiz-btn" onClick={handleCancelEdit}>
-              Cancel
-            </button>
-          </div>
+        {quizData && quizData.length > 0 ? (
+          <>
+            {editingQuestionIndex !== null ? (
+              <div>
+                <input
+                  type="text"
+                  value={newQuestionText}
+                  onChange={(e) => setNewQuestionText(e.target.value)}
+                />
+                <ul>
+                  {newOptions.map((option, index) => (
+                    <li key={index + 1}>
+                      <input
+                        type="text"
+                        value={option}
+                        onChange={(e) => {
+                          const updatedOptions = [...newOptions];
+                          updatedOptions[index] = e.target.value;
+                          setNewOptions(updatedOptions);
+                        }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <button className="quiz-btn" onClick={handleSaveEdit}>
+                  Save
+                </button>
+                <button className="quiz-btn" onClick={handleCancelEdit}>
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <div>
+                <h3 className="quiz-question">
+                  <IoIosCreate size={30} onClick={() => handleEditClick(currentQuestion)} />
+                  <span className="question-text">{currentQuizQuestion.question}</span>
+                </h3>
+                <ul>
+                  {currentQuizQuestion.options.map((option, index) => (
+                    <li
+                      key={index + 1}
+                      className={selectedOption === index ? "selected-option" : ""}
+                      onClick={() => handleOptionSelect(index)}
+                    >
+                      <label>
+                        <input
+                          type="radio"
+                          name="option"
+                          checked={selectedOption === index}
+                          onChange={() => handleOptionSelect(index)}
+                        />
+                        {option}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="pre-next">
+              {currentQuestion !== 0 && (
+                <button className="quiz-btn" onClick={handlePrevious} disabled={currentQuestion === 0}>
+                  Previous
+                </button>
+              )}
+
+              {currentQuestion === quizData.length - 1 ? (
+                <button className="quiz-btn" onClick={handleNext}>
+                  Submit
+                </button>
+              ) : (
+                <button className="quiz-btn" onClick={handleNext} disabled={selectedOption === null}>
+                  Next
+                </button>
+              )}
+            </div>
+          </>
         ) : (
           <div>
-            <h3 className="quiz-question">
-              <IoIosCreate size={30} onClick={() => handleEditClick(currentQuestion)} />
-              <span className="question-text">{currentQuizQuestion.question}</span>
-            </h3>
-
-            <ul>
-              {currentQuizQuestion.options.map((option, index) => (
-                <li
-                  key={index + 1}
-                  className={selectedOption === index ? "selected-option" : ""}
-                  onClick={() => handleOptionSelect(index)}
-                >
-                  <label>
-                    <input
-                      type="radio"
-                      name="option"
-                      checked={selectedOption === index}
-                      onChange={() => handleOptionSelect(index)}
-                    />
-                    {option}
-                  </label>
-                </li>
-              ))}
-            </ul>
+           <div className="note"> No questions have been added yet  ,</div> 
+            <Link className="quiz-btn" to='./test'>Click To Add</Link>
           </div>
         )}
-        <div className="pre-next">
-          {currentQuestion !== 0 && (
-            <button className="quiz-btn" onClick={handlePrevious} disabled={currentQuestion === 0}>
-              Previous
-            </button>
-          )}
-
-          {currentQuestion === quizData.length - 1 ? (
-            <button className="quiz-btn" onClick={handleNext}>
-              Submit
-            </button>
-          ) : (
-            <button className="quiz-btn" onClick={handleNext} disabled={selectedOption === null}>
-              Next
-            </button>
-          )}
-        </div>
       </div>
     </>
   );

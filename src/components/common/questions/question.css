@@ -102,3 +102,10 @@
   margin-top: 20px;
   text-align: center;
 }
+a{
+  text-decoration: none;
+}
+.note{
+  font-weight: bold;
+  margin-bottom: 1rem ;
+}
