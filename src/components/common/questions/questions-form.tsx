@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import './form.css';
+import { FormProps } from '../../../interface';
 
-interface FormProps {
-    onSubmit: (question: string, options: string[], type: string, Class: string, weight: number) => void;
-}
+
 
 const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
     const [question, setQuestion] = useState('');
