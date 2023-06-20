@@ -5,9 +5,12 @@ import { EditOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 
 interface QuizQuestion {
-  
+
   question: string;
   options: string[];
+  weight: number;
+  Class: string;
+  type: string;
   answer: number;
 }
 const SoftwareReport = (props: any) => {
@@ -145,8 +148,12 @@ const SoftwareReport = (props: any) => {
             ) : (
               <div>
                 <h3 className="quiz-question">
-                  <EditOutlined size={30} onClick={() => handleEditClick(currentQuestion)}/>
-                  <span className="question-text">{currentQuizQuestion.question}</span>
+                  <div>
+                    <EditOutlined size={30} onClick={() => handleEditClick(currentQuestion)} />
+                    <span className="question-text">{currentQuizQuestion.question}</span>
+                  </div>
+                  <span className="question-text">{currentQuizQuestion.weight} %</span>
+
                 </h3>
                 <ul>
                   {currentQuizQuestion.options.map((option, index) => (
@@ -190,7 +197,7 @@ const SoftwareReport = (props: any) => {
         ) : (
           <div className=" clc" >
             <div className="note clc"> No questions have been added yet  ,</div>
-            <button className="quiz-btn clc" onClick={()=>navigate('/add-questions')}>Click To Add</button>
+            <button className="quiz-btn clc" onClick={() => navigate('/add-questions')}>Click To Add</button>
           </div>
         )}
       </div>
