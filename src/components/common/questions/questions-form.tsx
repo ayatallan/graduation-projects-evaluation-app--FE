@@ -8,7 +8,8 @@ interface FormProps {
 const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
     const [question, setQuestion] = useState('');
     const [options, setOptions] = useState<string[]>(['', '', '', '']);
-
+    const [type, setType] = useState('');
+    const [weight, setWeight] = useState(0);
     const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuestion(e.target.value);
     };

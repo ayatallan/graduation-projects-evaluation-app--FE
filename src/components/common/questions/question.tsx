@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./question.css";
-import { IoIosCreate } from "react-icons/io";
+import { EditOutlined } from "@ant-design/icons";
+
 import { Link, useNavigate } from "react-router-dom";
 
 interface QuizQuestion {
+  
   question: string;
   options: string[];
   answer: number;
@@ -143,7 +145,7 @@ const SoftwareReport = (props: any) => {
             ) : (
               <div>
                 <h3 className="quiz-question">
-                  <IoIosCreate size={30} onClick={() => handleEditClick(currentQuestion)} />
+                  <EditOutlined size={30} onClick={() => handleEditClick(currentQuestion)}/>
                   <span className="question-text">{currentQuizQuestion.question}</span>
                 </h3>
                 <ul>
@@ -186,9 +188,9 @@ const SoftwareReport = (props: any) => {
             </div>
           </>
         ) : (
-          <div>
-           <div className="note"> No questions have been added yet  ,</div> 
-            <Link className="quiz-btn" to='./test'>Click To Add</Link>
+          <div className=" clc" >
+            <div className="note clc"> No questions have been added yet  ,</div>
+            <button className="quiz-btn clc" onClick={()=>navigate('/add-questions')}>Click To Add</button>
           </div>
         )}
       </div>

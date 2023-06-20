@@ -64,6 +64,18 @@
   
 }
 
+.clc >button {
+  margin-top: 20px;
+  margin-right: 1rem;
+  padding: .5rem 1rem;
+  background-color: #FFC2C2;
+  cursor: pointer;
+  border-radius: 10px;
+  color: black;
+  box-shadow: 2px 1px 3px 0px #bb8484
+  
+}
+
 .quiz-btn {
  width: 150px;
   border: none;

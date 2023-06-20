@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
 import FormsPage from './pages/forms/forms.page';
@@ -18,6 +18,8 @@ interface Question {
 
 
 function App() {
+
+  // const navigate = useNavigate();
   const [initialLocation, setInitialLocation] = useState('');
 
   useEffect(() => {
@@ -43,6 +45,9 @@ function App() {
     localStorage.setItem('questions', JSON.stringify(updatedQuestions));
 
     console.log('Updated Questions:', updatedQuestions);
+    // navigate('/Questions');
+
+
   };
 
   return (
@@ -51,7 +56,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/Home" element={<HomePage />} />
-          <Route path="/test" element={<QuestionsForm onSubmit={handleSubmit} />} />
+          <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
