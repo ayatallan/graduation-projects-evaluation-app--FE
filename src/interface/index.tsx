@@ -17,4 +17,8 @@ export interface Question {
   export interface FormProps {
     onSubmit: (question: string, options: string[], type: string, Class: string, weight: number) => void;
 }
-  
+export interface Instructor {
+  id: number;
+  name: string;
+  email: string;
+}
