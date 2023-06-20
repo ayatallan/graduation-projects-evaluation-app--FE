@@ -25,11 +25,20 @@ const SignInPage = (props: any) => {
 
   return (
     <div className="container1">
+
       <div className="ImageSignUpPage">
         <img src="logo.png" alt="ppu" />
+        <h3 className='ppu'> Palestine Polytechnic University</h3>
+        <span className='about'>Graduation Projects Evaluation App is designed to provides an easy-to-use platform for evaluating graduation
+          projects on specific criteria.
+        </span>
       </div>
+      <div className='click'>Click Here To Login </div>
+
       <div className="SignUpButton">
-        <GoogleLogin  onSuccess={responseMessage} onError={() => errorMessage || undefined} />
+        <div>
+          <GoogleLogin onSuccess={responseMessage} onError={() => errorMessage || undefined} />
+        </div>
       </div>
 
     </div>
