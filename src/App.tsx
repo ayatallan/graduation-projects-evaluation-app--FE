@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
 import FormsPage from './pages/forms/forms.page';
@@ -12,8 +12,12 @@ import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation
 import SoftwareReport from './components/common/questions/question';
 import QuestionsForm from './components/common/questions/questions-form';
 interface Question {
+  id: number
   question: string;
   options: string[];
+  type: string;
+  Class: string;
+  weight: number
 }
 
 
@@ -32,10 +36,14 @@ function App() {
     return savedQuestions ? JSON.parse(savedQuestions) : [];
   });
 
-  const handleSubmit = (question: string, options: string[]) => {
+  const handleSubmit = (question: string, options: string[], type: string, Class: string, weight: number) => {
     const newQuestion: Question = {
+      id: Date.now(),
       question: question,
-      options: options
+      options: options,
+      type: type,
+      Class: Class,
+      weight: weight,
     };
 
     const updatedQuestions = [...questions, newQuestion];
