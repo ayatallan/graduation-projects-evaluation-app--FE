@@ -3,16 +3,9 @@ import "./question.css";
 import { EditOutlined } from "@ant-design/icons";
 
 import { Link, useNavigate } from "react-router-dom";
+import { QuizQuestion } from "../../../interface";
 
-interface QuizQuestion {
 
-  question: string;
-  options: string[];
-  weight: number;
-  Class: string;
-  type: string;
-  answer: number;
-}
 const SoftwareReport = (props: any) => {
   const navigate = useNavigate();
 
@@ -24,6 +17,7 @@ const SoftwareReport = (props: any) => {
   const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
   const [newQuestionText, setNewQuestionText] = useState("");
   const [newOptions, setNewOptions] = useState<string[]>([]);
+  const [newWeight, setNewWeight] = useState(0);
 
   const handleOptionSelect = (optionIndex: number) => {
     setSelectedOption(optionIndex);
@@ -57,7 +51,8 @@ const SoftwareReport = (props: any) => {
   const updateQuestion = (
     questionIndex: number,
     newQuestionText: string,
-    newOptions: string[]
+    newOptions: string[],
+    newWeight: number
   ) => {
     setQuizData((prevQuizData) => {
       const updatedData = prevQuizData.map((question, index) => {
@@ -66,14 +61,15 @@ const SoftwareReport = (props: any) => {
             ...question,
             question: newQuestionText,
             options: newOptions,
+            weight: newWeight, 
           };
         }
         return question;
       });
-
+  
       // Update local storage
       localStorage.setItem("questions", JSON.stringify(updatedData));
-
+  
       return updatedData;
     });
   };
@@ -90,20 +86,24 @@ const SoftwareReport = (props: any) => {
     setEditingQuestionIndex(questionIndex);
     setNewQuestionText(quizData[questionIndex].question);
     setNewOptions([...quizData[questionIndex].options]);
+    setNewWeight(quizData[questionIndex].weight);
+
   };
 
   const handleCancelEdit = () => {
     setEditingQuestionIndex(null);
     setNewQuestionText("");
     setNewOptions([]);
+    setNewWeight(0);
   };
 
   const handleSaveEdit = () => {
     if (editingQuestionIndex !== null) {
-      updateQuestion(editingQuestionIndex, newQuestionText, newOptions);
+      updateQuestion(editingQuestionIndex, newQuestionText, newOptions,newWeight);
       setEditingQuestionIndex(null);
       setNewQuestionText("");
       setNewOptions([]);
+      setNewWeight(0);
     }
   };
 
@@ -112,39 +112,54 @@ const SoftwareReport = (props: any) => {
   return (
     <>
       <p className="path">{props.path}</p>
-      <div className="quiz-container">
         <h2 className="project-name">Project Name</h2>
+      <div className="quiz-container">
         {quizData && quizData.length > 0 ? (
           <>
             {editingQuestionIndex !== null ? (
-              <div>
-                <input
-                  type="text"
-                  value={newQuestionText}
-                  onChange={(e) => setNewQuestionText(e.target.value)}
-                />
-                <ul>
-                  {newOptions.map((option, index) => (
-                    <li key={index + 1}>
-                      <input
-                        type="text"
-                        value={option}
-                        onChange={(e) => {
-                          const updatedOptions = [...newOptions];
-                          updatedOptions[index] = e.target.value;
-                          setNewOptions(updatedOptions);
-                        }}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <button className="quiz-btn" onClick={handleSaveEdit}>
-                  Save
-                </button>
-                <button className="quiz-btn" onClick={handleCancelEdit}>
-                  Cancel
-                </button>
-              </div>
+       <div className="form-container">
+       <label htmlFor="questionText">Question Text:</label>
+       <input
+         type="text"
+         id="questionText"
+         value={newQuestionText}
+         onChange={(e) => setNewQuestionText(e.target.value)}
+       />
+     
+       <label htmlFor="weight">Weight:</label>
+       <input
+         type="number"
+         id="weight"
+         value={newWeight}
+         onChange={(e) => setNewWeight(Number(e.target.value))}
+       />
+     
+       <label htmlFor="options">Options:</label>
+       <ul>
+         {newOptions.map((option, index) => (
+           <li key={index + 1}>
+             <input
+               type="text"
+               value={option}
+               onChange={(e) => {
+                 const updatedOptions = [...newOptions];
+                 updatedOptions[index] = e.target.value;
+                 setNewOptions(updatedOptions);
+               }}
+             />
+           </li>
+         ))}
+       </ul>
+     
+       <button className="quiz-btn" onClick={handleSaveEdit}>
+         Save
+       </button>
+       <button className="quiz-btn" onClick={handleCancelEdit}>
+         Cancel
+       </button>
+     </div>
+     
+      
             ) : (
               <div>
                 <h3 className="quiz-question">

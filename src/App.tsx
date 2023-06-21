@@ -1,25 +1,20 @@
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
-import FormsPage from './pages/forms/forms.page';
-
-import './App.css';
-import { useEffect, useState } from 'react';
-import HomePage from './pages/Home/Home.pages';
 import GroupsPage from './pages/Groups/Groups.pages';
 import EvaluationPage from './pages/Evaluation/Evaluation.page';
 import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
 import SoftwareReport from './components/common/questions/question';
 import QuestionsForm from './components/common/questions/questions-form';
-interface Question {
-  id: number
-  question: string;
-  options: string[];
-  type: string;
-  Class: string;
-  weight: number
-}
 
+import { Question } from './interface';
+
+import './App.css';
+import Student from './components/common/students/students';
+import CreateInstructorPage from './pages/add-instructor/instructor.page';
+import CreateStudentPage from './pages/add-student/student.page';
 
 function App() {
 
@@ -63,15 +58,14 @@ function App() {
       <MyNavbar />
       <BrowserRouter>
         <Routes>
-          <Route path="/Home" element={<HomePage />} />
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/SignIn" element={<SignInPage />} />
+          <Route path="/" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
-          <Route path="/Forms" element={<FormsPage path={Path} />} />
           <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
+          <Route path="/add-instructor" element={<CreateInstructorPage />} />
+          <Route path="/add-student" element={<CreateStudentPage />} />
         </Routes>
       </BrowserRouter>
 
