@@ -1,11 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { Instructor } from '../../../interface';
-
-
-
-interface InstructorFormProps {
-    onSubmit: (instructor: Instructor) => void;
-}
+import { Instructor, InstructorFormProps } from '../../../interface';
 
 const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
     const [instructor, setInstructor] = useState<Instructor>({
@@ -26,7 +20,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
         e.preventDefault();
         onSubmit(instructor);
         saveToLocalStorage(instructor); // Save instructor data to local storage
-        clearForm(); // Clear the form inputs
+        clearForm(); 
     };
 
     const saveToLocalStorage = (data: Instructor) => {
@@ -61,6 +55,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
                     name="name"
                     value={instructor.name}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -69,11 +64,12 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
                 </label>
                 <input
                     className="form-input"
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     value={instructor.email}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <button className="form-button " type="submit">Create Instructor</button>

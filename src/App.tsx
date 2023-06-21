@@ -14,6 +14,7 @@ import { Question } from './interface';
 import './App.css';
 import Student from './components/common/students/students';
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
+import CreateStudentPage from './pages/add-student/student.page';
 
 function App() {
 
@@ -51,7 +52,7 @@ function App() {
 
 
   };
-  
+
   return (
     <div className="App">
       <MyNavbar />
@@ -63,8 +64,8 @@ function App() {
           <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
-          <Route path="/add-student-form" element={<Student />} />
-          <Route path="/add-instructor-form" element={<CreateInstructorPage/>} />
+          <Route path="/add-instructor" element={<CreateInstructorPage />} />
+          <Route path="/add-student" element={<CreateStudentPage />} />
         </Routes>
       </BrowserRouter>
 
