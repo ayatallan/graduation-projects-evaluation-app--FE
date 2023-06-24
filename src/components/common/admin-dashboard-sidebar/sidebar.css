@@ -7,6 +7,8 @@
   position: fixed;
   height: 100%;
   overflow: auto;
+  font-size: 15px;
+
 
 }
 
@@ -26,8 +28,14 @@
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-  background-color: #eb646b;
-  color: rgb(126, 45, 45);
+  background-color: #FFC2C2;
+  color: rgb(122, 60, 60);
+  border-radius: 5px;
+  margin: 10px;
+
+  height: 50px;
+  background-color: #e98e8e;
+  color: rgb(122, 60, 60);
 }
 
 
@@ -45,8 +53,14 @@ div.content {
     height: auto;
     position: relative;
   }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
+
+  .sidebar a {
+    float: left;
+  }
+
+  div.content {
+    margin-left: 0;
+  }
 }
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
@@ -56,7 +70,16 @@ div.content {
     float: none;
   }
 }
-.clicked{
-  background-color: #eb646b;
-  color: rgb(126, 45, 45);
+
+.clicked {
+  border-radius: 5px;
+  margin: 10px;
+
+  height: 50px;
+  background-color: #e98e8e;
+  color: rgb(122, 60, 60);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
