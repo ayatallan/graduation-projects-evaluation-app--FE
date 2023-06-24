@@ -19,7 +19,6 @@ const CreateInstructorPage: React.FC = () => {
   const handleFormSubmit = (instructor: Instructor) => {
     setInstructors(prevInstructors => [...prevInstructors, instructor]);
     setShowForm(false); // Hide the form after submitting
-    saveToLocalStorage([...instructors, instructor]); // Save updated data to local storage
   };
 
   const toggleForm = () => {

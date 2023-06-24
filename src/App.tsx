@@ -12,7 +12,6 @@ import QuestionsForm from './components/common/questions/questions-form';
 import { Question } from './interface';
 
 import './App.css';
-import Student from './components/common/students/students';
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
 import CreateStudentPage from './pages/add-student/student.page';
 
