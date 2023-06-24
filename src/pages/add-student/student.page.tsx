@@ -49,8 +49,8 @@ const CreateStudentPage: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map(student => (
-                        <tr key={student.id}>
+                    {students.map((student, index) => (
+                        <tr key={index}>
                             <td>{student.id}</td>
                             <td>{student.name}</td>
                             <td>{student.email}</td>
