@@ -12,12 +12,30 @@ import './App.css';
 import { useEffect, useState } from 'react';
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem("loginData") 
+    ? JSON.parse(localStorage.getItem("loginData")!)
+    : null
+  );
+
+  useEffect(() => {
+    if(!loginData) {
+      
+    }
+  }, []);
 
   useEffect(() => {
     setInitialLocation(window.location.pathname);
   }, []);
   const Path: String = `${initialLocation}`;
   console.log(Path);
+  
+  const options = {
+    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID, // required
+    auto_select: false, // optional
+    cancel_on_tap_outside: false, // optional
+    context: 'signin', // optional
+  };
 
   return (
     <div className="App">
