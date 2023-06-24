@@ -1,0 +1,16 @@
+.student-name {
+    border:1px solid black ;
+    height: 20vh;
+    width: 15%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 7px;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    gap: 7px;
+}
+
+.create-group {
+    padding: 30px;
+}
