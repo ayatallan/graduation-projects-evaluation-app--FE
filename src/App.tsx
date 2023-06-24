@@ -14,7 +14,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import InstructorsPage from './pages/AdminDashboard/instructors/instructors.AdminPage';
 import GroupsAdminPage from './pages/AdminDashboard/groups/groups.AdminPage';
-import MajorsAdminPage from './pages/AdminDashboard/majors/Majors.AdminPage';
+import MajorsAdminPage from './pages/AdminDashboard/Majors/Majors.AdminPage';
 import RubricsAdminPage from './pages/AdminDashboard/rubrics/Rubrics.AdminPage';
 
 function App() {
