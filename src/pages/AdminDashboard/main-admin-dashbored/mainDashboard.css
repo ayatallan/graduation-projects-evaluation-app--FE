@@ -1,0 +1,15 @@
+.mainDash {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.mainDash > main {
+    flex-grow: 1;
+}
+
+@media screen and (min-width: 701px) {
+    .mainDash>main {
+        margin-left: 200px;
+    }
+}
