@@ -1,5 +1,6 @@
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
 
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
@@ -11,10 +12,17 @@ import QuestionsForm from './components/common/questions/questions-form';
 
 import { Question } from './interface';
 
-import './App.css';
+
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
 import CreateStudentPage from './pages/add-student/student.page';
 import CreateGroup from './pages/create-group/createGroup';
+import MainDashboard from './pages/AdminDashboard/main-admin-dashbored/mainDashboard.page';
+import StudentsPage from './pages/AdminDashboard/students/student.AdminPage';
+
+import InstructorsPage from './pages/AdminDashboard/instructors/instructors.AdminPage';
+import GroupsAdminPage from './pages/AdminDashboard/groups/groups.AdminPage';
+import MajorsAdminPage from './pages/AdminDashboard/Majors/Majors.AdminPage';
+import RubricsAdminPage from './pages/AdminDashboard/rubrics/Rubrics.AdminPage';
 
 function App() {
 
@@ -55,8 +63,9 @@ function App() {
 
   return (
     <div className="App">
-      <MyNavbar />
+   
       <BrowserRouter>
+         <MyNavbar />
         <Routes>
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
           <Route path="/" element={<SignInPage />} />
@@ -67,6 +76,13 @@ function App() {
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />
           <Route path="/createGroup" element={<CreateGroup />} />
+          <Route path="/AdminDashboard" element={<MainDashboard/>}>
+            <Route path="StudentsPage" element={<StudentsPage />} />
+            <Route path="InstructorsPage" element={<InstructorsPage/>} />
+            <Route path="GroupsAdminPage" element={<GroupsAdminPage/>} />
+            <Route path="MajorsAdminPage" element={<MajorsAdminPage/>} />
+            <Route path="RubricsAdminPage" element={<RubricsAdminPage/>} />
+          </Route>
         </Routes>
       </BrowserRouter>
 
