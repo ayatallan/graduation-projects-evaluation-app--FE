@@ -1,14 +1,10 @@
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
 import GroupsPage from './pages/Groups/Groups.pages';
 import EvaluationPage from './pages/Evaluation/Evaluation.page';
 import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
-import SoftwareReport from './components/common/questions/question';
-import QuestionsForm from './components/common/questions/questions-form';
-
-import { Question } from './interface';
 
 import './App.css';
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
@@ -43,7 +39,6 @@ function App() {
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />
           <Route path="/createGroup" element={<CreateGroup />} />
-
           <Route path="/AdminDashboard" element={<MainDashboard/>}>
             <Route path="StudentsPage" element={<StudentsPage />} />
             <Route path="InstructorsPage" element={<InstructorsPage/>} />
