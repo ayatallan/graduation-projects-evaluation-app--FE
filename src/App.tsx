@@ -1,15 +1,22 @@
-
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
 import GroupsPage from './pages/Groups/Groups.pages';
 import EvaluationPage from './pages/Evaluation/Evaluation.page';
 import StudentEvaluationPage from './pages/Student-Evaluation/student-evaluation.page';
+import SoftwareReport from './components/common/questions/question';
+import QuestionsForm from './components/common/questions/questions-form';
+
+import { Question } from './interface';
+
+import './App.css';
+import CreateInstructorPage from './pages/add-instructor/instructor.page';
+import CreateStudentPage from './pages/add-student/student.page';
+import CreateGroup from './pages/create-group/createGroup';
 import MainDashboard from './pages/AdminDashboard/main-admin-dashbored/mainDashboard.page';
 import StudentsPage from './pages/AdminDashboard/students/student.AdminPage';
 
-import './App.css';
-import { useEffect, useState } from 'react';
 import InstructorsPage from './pages/AdminDashboard/instructors/instructors.AdminPage';
 import GroupsAdminPage from './pages/AdminDashboard/groups/groups.AdminPage';
 import MajorsAdminPage from './pages/AdminDashboard/Majors/Majors.AdminPage';
@@ -33,6 +40,10 @@ function App() {
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
           <Route path="/Evaluation" element={<EvaluationPage />} />
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
+          <Route path="/add-instructor" element={<CreateInstructorPage />} />
+          <Route path="/add-student" element={<CreateStudentPage />} />
+          <Route path="/createGroup" element={<CreateGroup />} />
+
           <Route path="/AdminDashboard" element={<MainDashboard/>}>
             <Route path="StudentsPage" element={<StudentsPage />} />
             <Route path="InstructorsPage" element={<InstructorsPage/>} />
