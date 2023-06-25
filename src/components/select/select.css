@@ -16,7 +16,6 @@
   background-size: 16px 12px;
   min-width: 220px;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  margin-top: 20px;
 }
 
 .select-group > select:focus {

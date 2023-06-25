@@ -57,57 +57,59 @@ const CreateGroup = () => {
 
   return (
     <div className="create-group">
+      <div className="form-group">
       <div className="btnn">
         <button className="quiz-btn" onClick={toggleForm}>
           Create Group
         </button>
       </div>
       {showForm && (
-        <form onSubmit={handleSubmit}>
-          <Select
-            name="instructor"
-            label="Instructor"
-            value={index}
-            onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
-          >
-            {data.map((data: Name, index: number) => (
-              <option key={index} value={index}>
-                {data.name}
-              </option>
-            ))}
-          </Select>
-          <div className="group-name">
-            <label htmlFor="group-name">Group Name:</label>
-            <input
-              type="text"
-              id="group-name"
-              value={groupName}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setGroupName(e.target.value)}
-            />
-          </div>
-          <div className="student-name">
-            {students.map((data: StudentName, index: number) => (
-                              <CheckBox
-                              key={index}
-                              value={index}
-                              label={data.name}
-                              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                if (event.target.checked) {
-                                  setSelectedStudents((prevStudents) => [...prevStudents, data.name]);
-                                } else {
-                                  setSelectedStudents((prevStudents) =>
-                                    prevStudents.filter((student) => student !== data.name)
-                                  );
-                                }
-                              }}
-                            />
-                          ))}
-                        </div>
-                        <button type="submit">Submit</button>
-                      </form>
+          <form onSubmit={handleSubmit}>
+            <div className="group-name">
+              <label htmlFor="group-name">Project Name:</label>
+              <input
+                type="text"
+                id="group-name"
+                value={groupName}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setGroupName(e.target.value)}
+              />
+            </div>
+            <Select
+              name="instructor"
+              label="Instructor"
+              value={index}
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
+            >
+              {data.map((data: Name, index: number) => (
+                <option key={index} value={index}>
+                  {data.name}
+                </option>
+              ))}
+            </Select>
+            <div className="student-name">
+              {students.map((data: StudentName, index: number) => (
+                                <CheckBox
+                                key={index}
+                                value={index}
+                                label={data.name}
+                                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                  if (event.target.checked) {
+                                    setSelectedStudents((prevStudents) => [...prevStudents, data.name]);
+                                  } else {
+                                    setSelectedStudents((prevStudents) =>
+                                      prevStudents.filter((student) => student !== data.name)
+                                    );
+                                  }
+                                }}
+                              />
+                            ))}
+                          </div>
+                          <button type="submit">Submit</button>
+                        </form>
                     )}
+                    </div>
                     {submit && (
-                      <>
+                      <div className='group-card'>
                         {groupData.map((group, index) => (
                           <Card key={index}>
                             <Card.Body>
@@ -126,7 +128,7 @@ const CreateGroup = () => {
                             </Card.Body>
                           </Card>
                         ))}
-                      </>
+                      </div>
                     )}
                   </div>
                
