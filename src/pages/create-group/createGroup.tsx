@@ -33,17 +33,22 @@ const CreateGroup = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedStudents.length >= 2 && groupName.trim() !== '') {
+    if (selectedStudents.length >= 2 && selectedStudents.length <= 3 && groupName.trim() !== '') {
       const instructorName = data[index]?.name;
       const group = { groupName, instructor: instructorName, students: selectedStudents };
       setGroupData((prevGroupData) => [...prevGroupData, group]);
       saveGroupDataToLocalStorage([...groupData, group]);
       clearForm();
       setSubmit(true);
+    } else if (selectedStudents.length < 2) {
+      alert('Please select at least two students');
+    } else if (selectedStudents.length > 3) {
+      alert('Please select at most three students');
     } else {
-      alert('Please enter a group name and select at least two students');
+      alert('Please enter a group name');
     }
   };
+  
 
   const saveGroupDataToLocalStorage = (data: { groupName: string; instructor: string; students: string[] }[]) => {
     localStorage.setItem('groupData', JSON.stringify(data));
@@ -69,6 +74,7 @@ const CreateGroup = () => {
               <label htmlFor="group-name">Project Name:</label>
               <input
                 type="text"
+                required
                 id="group-name"
                 value={groupName}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setGroupName(e.target.value)}
@@ -77,6 +83,7 @@ const CreateGroup = () => {
             <Select
               name="instructor"
               label="Instructor"
+              required
               value={index}
               onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
             >
@@ -88,20 +95,25 @@ const CreateGroup = () => {
             </Select>
             <div className="student-name">
               {students?.map((data: StudentName, index: number) => (
-                                <CheckBox
-                                key={index}
-                                value={index}
-                                label={data.name}
-                                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                  if (event.target.checked) {
-                                    setSelectedStudents((prevStudents) => [...prevStudents, data.name]);
-                                  } else {
-                                    setSelectedStudents((prevStudents) =>
-                                      prevStudents.filter((student) => student !== data.name)
-                                    );
-                                  }
-                                }}
-                              />
+                               <CheckBox
+                               key={index}
+                               value={index}
+                               label={data.name}
+                               onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                 if (event.target.checked) {
+                                   if (selectedStudents.length < 3) {
+                                     setSelectedStudents((prevStudents) => [...prevStudents, data.name]);
+                                   } else {
+                                     event.target.checked = false; // Uncheck the checkbox if the limit is exceeded
+                                     alert('You can select at most three students');
+                                   }
+                                 } else {
+                                   setSelectedStudents((prevStudents) =>
+                                     prevStudents.filter((student) => student !== data.name)
+                                   );
+                                 }
+                               }}
+                             />
                             ))}
                           </div>
                           <button type="submit">Submit</button>
