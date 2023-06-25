@@ -14,6 +14,7 @@ import { Question } from './interface';
 import './App.css';
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
 import CreateStudentPage from './pages/add-student/student.page';
+import CreateGroup from './pages/create-group/createGroup';
 
 function App() {
 
@@ -65,6 +66,7 @@ function App() {
           <Route path="/StudentEvaluation" element={<StudentEvaluationPage />} />
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />
+          <Route path="/createGroup" element={<CreateGroup />} />
         </Routes>
       </BrowserRouter>
 
