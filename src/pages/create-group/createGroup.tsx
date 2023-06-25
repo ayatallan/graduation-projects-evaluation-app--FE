@@ -80,14 +80,14 @@ const CreateGroup = () => {
               value={index}
               onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
             >
-              {data.map((data: Name, index: number) => (
+              {data?.map((data: Name, index: number) => (
                 <option key={index} value={index}>
                   {data.name}
                 </option>
               ))}
             </Select>
             <div className="student-name">
-              {students.map((data: StudentName, index: number) => (
+              {students?.map((data: StudentName, index: number) => (
                                 <CheckBox
                                 key={index}
                                 value={index}
@@ -110,7 +110,7 @@ const CreateGroup = () => {
                     </div>
                     {submit && (
                       <div className='group-card'>
-                        {groupData.map((group, index) => (
+                        {groupData?.map((group, index) => (
                           <Card key={index}>
                             <Card.Body>
                               <Card.Title>{group.groupName}</Card.Title>
