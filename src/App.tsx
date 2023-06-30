@@ -21,11 +21,11 @@ function App() {
   useEffect(() => {
     fetchQuestions();
   }, []);
-  
+
   const fetchQuestions = async () => {
     try {
       const response = await fetch('http://localhost:3002/questions');
-  
+
 
       const data = await response.json();
       setQuestions(data);
@@ -33,7 +33,7 @@ function App() {
       console.error(error);
     }
   };
-  
+
   const handleSubmit = async (
     question: string,
     options: string[],
@@ -49,7 +49,7 @@ function App() {
       Class: Class,
       weight: weight,
     };
-  
+
     try {
       const response = await fetch('http://localhost:3002/questions', {
         method: 'POST',
@@ -58,18 +58,18 @@ function App() {
         },
         body: JSON.stringify(newQuestion),
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to add question');
       }
-  
+
       const data = await response.json();
       setQuestions((prevQuestions) => [...prevQuestions, data]);
-    } catch (error)   {
+    } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <div className="App">
       <MyNavbar />
