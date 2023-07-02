@@ -9,16 +9,14 @@
   box-shadow: 5px 5px 8px 3px rgba(0, 0, 0, 0.2);
 }
 
-.form > .box {
+.form>.box {
   display: flex;
   justify-content: space-between;
 }
 
-.form > .box > .sub-box {
-  /* background-color: blue; */
-}
 
-.form > .box > .sub-box > .form-label {
+
+.form>.box>.sub-box>.form-label {
   margin-bottom: 10px;
   font-weight: bold;
   color: white;
@@ -26,7 +24,7 @@
   font-size: 18px;
 }
 
-.form > .box > .sub-box .form-input {
+.form>.box>.sub-box .form-input {
   width: 100%;
   padding: 10px;
   border: 2px solid #b16c8b;
@@ -36,7 +34,11 @@
   margin-bottom: 10px;
 }
 
-.form > .box > .sub-box .form-input:focus {
+
+
+
+
+.form>.box>.sub-box .form-input:focus {
   outline: none;
   border-color: #FF69B4;
   box-shadow: 0 0 4px #FF69B4;

@@ -58,19 +58,20 @@ const CreateGroup = () => {
   return (
     <div className="create-group">
       <div className="form-group">
-      <div className="btnn">
-        <button className="quiz-btn" onClick={toggleForm}>
+      <div className="btnn1">
+        <button className="quiz-btn1" onClick={toggleForm}>
           Create Group
         </button>
       </div>
       {showForm && (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="my-form">
             <div className="group-name">
-              <label htmlFor="group-name">Project Name:</label>
+              <label htmlFor="group-name" className="my-label">Project Name:</label>
               <input
                 type="text"
                 id="group-name"
                 value={groupName}
+                className="my-input"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setGroupName(e.target.value)}
               />
             </div>
@@ -120,9 +121,9 @@ const CreateGroup = () => {
                               <Card.Text>
                                 <strong>Students:</strong>
                               </Card.Text>
-                              <ul>
+                              <ul className="my-ul">
                                 {group.students.map((student, studentIndex) => (
-                                  <li key={studentIndex}>{student}</li>
+                                  <li className="my-li" key={studentIndex}>{student}</li>
                                 ))}
                               </ul>
                             </Card.Body>

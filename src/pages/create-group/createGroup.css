@@ -16,11 +16,11 @@
     padding: 20px;
   }
   
-  .btnn {
+  .btnn1 {
     margin-bottom: 20px;
   }
   
-  .quiz-btn {
+  .quiz-btn1 {
     background-color: #FFC2C2;
     color: white;
     padding: 10px 20px;
@@ -29,7 +29,7 @@
     cursor: pointer;
   }
   
-  form {
+  .my-form {
     margin-bottom: 20px;
   }
   .form-group {
@@ -38,12 +38,12 @@
     align-items: center;
     flex-direction: column;
   }
-  label {
+  .my-label {
     display: block;
     margin-bottom: 10px;
   }
   
-  input[type="text"] {
+  .group-name > .my-input {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
@@ -69,13 +69,13 @@
     cursor: pointer;
   }
   
-  ul {
+  .my-ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
   }
   
-  li {
+  .my-li {
     margin-bottom: 5px;
   }
   
@@ -102,7 +102,7 @@
     font-weight: bold;
   }
   
-  form {
+  .my-form {
     margin-bottom: 20px;
     width: 400px;
     height: 440px;
@@ -112,23 +112,23 @@
     background-color: #f5f5f5;
   }
   
-  form label {
+  .my-form .my-label {
     display: block;
     margin-bottom: 10px;
   }
   
-  form input[type="text"] {
+  .my-form > .group-name > .my-input {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
   }
   
-  form .group-name {
+  .my-form .group-name {
     margin-bottom: 20px;
   }
   
-  form .student-name {
+  .my-form .student-name {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -137,7 +137,7 @@
     margin-bottom: 20px;
   }
   
-  form button[type="submit"] {
+  .my-form button[type="submit"] {
     background-color: #FFC2C2;
     color: white;
     padding: 10px 20px;
@@ -146,13 +146,13 @@
     cursor: pointer;
   }
   
-  form ul {
+  .my-form .my-ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
   }
   
-  form li {
+  .my-form  .my-li {
     margin-bottom: 5px;
   }
 

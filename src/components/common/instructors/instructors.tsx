@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Instructor, InstructorFormProps } from '../../../interface';
-
+import '../questions/form.css'
+import '../questions/question.css'
 const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
     const [instructor, setInstructor] = useState<Instructor>({
         id: Date.now(),
@@ -44,7 +45,6 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
     return (
         <form className="form" onSubmit={handleSubmit}>
 
-            <div>
                 <label className="form-label" htmlFor="name">
                     Name:
                 </label>
@@ -57,8 +57,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
                     onChange={handleChange}
                     required
                 />
-            </div>
-            <div>
+          
                 <label className="form-label" htmlFor="email">
                     Email:
                 </label>
@@ -71,7 +70,6 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
                     onChange={handleChange}
                     required
                 />
-            </div>
             <button className="form-button " type="submit">Create Instructor</button>
         </form>
     );

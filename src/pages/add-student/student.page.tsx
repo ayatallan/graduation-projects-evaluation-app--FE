@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Student } from '../../interface';
-import '../../pages/add-student/student.css';
+import '../../components/common/questions/form.css'
+import '../../components/common/questions/question.css'
 import StudentForm from '../../components/common/students/students';
 
 const CreateStudentPage: React.FC = () => {

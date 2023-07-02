@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Student, StudentFormProps } from '../../../interface';
+import '../questions/form.css'
+import '../questions/question.css'
 
 const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
     const [student, setStudent] = useState<Student>({
@@ -34,7 +36,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
 
     return (
         <form className="form" onSubmit={handleSubmit}>
-            <div>
                 <label className="form-label" htmlFor="name">
                     Name:
                 </label>
@@ -46,8 +47,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
                     value={student.name}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
                 <label className="form-label" htmlFor="email">
                     Email:
                 </label>
@@ -59,8 +58,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
                     value={student.email}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
                 <label className="form-label" htmlFor="major">
                     Major:
                 </label>
@@ -78,7 +75,6 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
                     <option value="CS">CS</option>
                     <option value="CSE">CSE</option>
                 </select>
-            </div>
             <button className="form-button" type="submit">
                 Create Student
             </button>
