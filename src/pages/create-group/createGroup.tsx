@@ -33,15 +33,19 @@ const CreateGroup = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedStudents.length >= 2 && groupName.trim() !== '') {
+    if (selectedStudents.length >= 2 && selectedStudents.length <= 3 && groupName.trim() !== '') {
       const instructorName = data[index]?.name;
       const group = { groupName, instructor: instructorName, students: selectedStudents };
       setGroupData((prevGroupData) => [...prevGroupData, group]);
       saveGroupDataToLocalStorage([...groupData, group]);
       clearForm();
       setSubmit(true);
+    } else if (selectedStudents.length < 2) {
+      alert('Please select at least two students');
+    } else if (selectedStudents.length > 3) {
+      alert('Please select at most three students');
     } else {
-      alert('Please enter a group name and select at least two students');
+      alert('Please enter a group name');
     }
   };
 
@@ -69,6 +73,7 @@ const CreateGroup = () => {
               <label htmlFor="group-name" className="my-label">Project Name:</label>
               <input
                 type="text"
+                required
                 id="group-name"
                 value={groupName}
                 className="my-input"
@@ -78,31 +83,37 @@ const CreateGroup = () => {
             <Select
               name="instructor"
               label="Instructor"
+              required
               value={index}
               onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
             >
-              {data.map((data: Name, index: number) => (
+              {data?.map((data: Name, index: number) => (
                 <option key={index} value={index}>
                   {data.name}
                 </option>
               ))}
             </Select>
             <div className="student-name">
-              {students.map((data: StudentName, index: number) => (
-                                <CheckBox
-                                key={index}
-                                value={index}
-                                label={data.name}
-                                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                  if (event.target.checked) {
-                                    setSelectedStudents((prevStudents) => [...prevStudents, data.name]);
-                                  } else {
-                                    setSelectedStudents((prevStudents) =>
-                                      prevStudents.filter((student) => student !== data.name)
-                                    );
-                                  }
-                                }}
-                              />
+              {students?.map((data: StudentName, index: number) => (
+                                 <CheckBox
+                                 key={index}
+                                 value={index}
+                                 label={data.name}
+                                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                   if (event.target.checked) {
+                                     if (selectedStudents.length < 3) {
+                                       setSelectedStudents((prevStudents) => [...prevStudents, data.name]);
+                                     } else {
+                                       event.target.checked = false; // Uncheck the checkbox if the limit is exceeded
+                                       alert('You can select at most three students');
+                                     }
+                                   } else {
+                                     setSelectedStudents((prevStudents) =>
+                                       prevStudents.filter((student) => student !== data.name)
+                                     );
+                                   }
+                                 }}
+                               />
                             ))}
                           </div>
                           <button type="submit">Submit</button>
@@ -111,7 +122,7 @@ const CreateGroup = () => {
                     </div>
                     {submit && (
                       <div className='group-card'>
-                        {groupData.map((group, index) => (
+                        {groupData?.map((group, index) => (
                           <Card key={index}>
                             <Card.Body>
                               <Card.Title>{group.groupName}</Card.Title>

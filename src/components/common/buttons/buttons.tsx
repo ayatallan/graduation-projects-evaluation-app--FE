@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import './button.css';
 interface Props {
-  text: string;
+  text: any;
 }
 const Buttons = (props: Props) => {
   return (

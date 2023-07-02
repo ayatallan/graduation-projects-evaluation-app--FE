@@ -18,7 +18,11 @@ const MyNavbar= (props : any) => {
      
       </Navbar.Collapse>
     </Navbar>  
-  
+    <div className="Side">
+    {props.showSidebar && <SideBar />}
+
+    </div>
+
     </div>
   );
 };
