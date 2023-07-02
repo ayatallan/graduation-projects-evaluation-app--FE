@@ -1,0 +1,45 @@
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 210px;
+  background-color: #fce8e8;
+  position: fixed;
+  height: 100vh;
+  overflow: auto;
+  font-size: 18px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+
+
+.sidebar a:hover:not(.active) {
+  background-color: #FFC2C2;
+  color: rgb(122, 60, 60);
+  border-radius: 5px;
+}
+
+.sidebar a svg {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar a span {
+  margin-left: 5px;
+}
+
+.clicked {
+  border-radius: 5px;
+
+  background-color: #ffc2c2;
+  color: rgb(122, 60, 60);
+  display: flex;
+  align-items: center;
+}

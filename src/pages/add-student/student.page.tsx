@@ -1,84 +1,86 @@
-  import React, { useState, useEffect } from 'react';
-  import { Student } from '../../interface';
-  import '../../pages/add-student/student.css';
-  import StudentForm from '../../components/common/students/students';
+import React, { useState, useEffect } from 'react';
+import '../../pages/add-student/student.css';
+import { Student } from '../../interface';
+import '../../components/common/questions/form.css'
+import '../../components/common/questions/question.css'
+import StudentForm from '../../components/common/students/students';
 
-  const CreateStudentPage: React.FC = () => {
-    const [students, setStudents] = useState<Student[]>([]);
-    const [showForm, setShowForm] = useState(false);
+const CreateStudentPage: React.FC = () => {
+  const [students, setStudents] = useState<Student[]>([]);
+  const [showForm, setShowForm] = useState(false);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('http://localhost:3002/students');
-          const retrievedStudents = await response.json();
-          setStudents(retrievedStudents);
-        } catch (error) {
-          console.error('Error retrieving students:', error);
-        }
-      };
-
-      fetchData();
-    }, []);
-
-    const handleFormSubmit = async (student: Student) => {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3002/students', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(student),
-        });
-        const createdStudent = await response.json();
-        const updatedStudents = [...students, createdStudent];
-        setStudents(updatedStudents);
-        setShowForm(false);
-        saveToLocalStorage(updatedStudents);
+        const response = await fetch('http://localhost:3002/students');
+        const retrievedStudents = await response.json();
+        setStudents(retrievedStudents);
       } catch (error) {
-        console.error('Error creating student:', error);
+        console.error('Error retrieving students:', error);
       }
     };
 
-    const toggleForm = () => {
-      setShowForm(!showForm);
-    };
+    fetchData();
+  }, []);
 
-    const saveToLocalStorage = (data: Student[]) => {
-      localStorage.setItem('students', JSON.stringify(data));
-    };
-
-    return (
-      <div className="wrapper">
-        <div className="btnn">
-          <button className="quiz-btn" onClick={toggleForm}>
-            Add Student
-          </button>
-        </div>
-
-        {showForm && <StudentForm onSubmit={handleFormSubmit} />}
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Major</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((student,index) => (
-              <tr key={index}>
-                <td>{student.id}</td>
-                <td>{student.name}</td>
-                <td>{student.email}</td>
-                <td>{student.major}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
+  const handleFormSubmit = async (student: Student) => {
+    try {
+      const response = await fetch('http://localhost:3002/students', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(student),
+      });
+      const createdStudent = await response.json();
+      const updatedStudents = [...students, createdStudent];
+      setStudents(updatedStudents);
+      setShowForm(false);
+      saveToLocalStorage(updatedStudents);
+    } catch (error) {
+      console.error('Error creating student:', error);
+    }
   };
 
-  export default CreateStudentPage;
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
+  const saveToLocalStorage = (data: Student[]) => {
+    localStorage.setItem('students', JSON.stringify(data));
+  };
+
+  return (
+    <div className="wrapper">
+      <div className="btnn">
+        <button className="quiz-btn" onClick={toggleForm}>
+          Add Student
+        </button>
+      </div>
+
+      {showForm && <StudentForm onSubmit={handleFormSubmit} />}
+      <table className="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Major</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((student, index) => (
+            <tr key={index}>
+              <td>{student.id}</td>
+              <td>{student.name}</td>
+              <td>{student.email}</td>
+              <td>{student.major}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default CreateStudentPage;

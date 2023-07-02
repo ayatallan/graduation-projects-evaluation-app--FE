@@ -35,3 +35,10 @@ export interface StudentFormProps {
 export interface InstructorFormProps {
   onSubmit: (instructor: Instructor) => void;
 }
+
+export interface Name {
+  name: string;
+}
+export interface StudentName {
+  name: string;
+}
