@@ -15,7 +15,7 @@ const SignInPage = (props: any) => {
   };
 
   useEffect(() => {
-    res && navigate('/Home');
+    res && navigate('/Groups');
 
   }, [res])
 
