@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./question.css";
 import { EditOutlined } from "@ant-design/icons";
 
@@ -19,6 +19,24 @@ const SoftwareReport = (props: any) => {
   const [newOptions, setNewOptions] = useState<string[]>([]);
   const [newWeight, setNewWeight] = useState(0);
 
+
+  useEffect(() => {
+    fetchQuizData();
+  }, []);
+
+  const fetchQuizData = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/questions');
+      const data = await response.json();
+      setQuizData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+  
   const handleOptionSelect = (optionIndex: number) => {
     setSelectedOption(optionIndex);
   };

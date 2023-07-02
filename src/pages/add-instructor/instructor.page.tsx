@@ -8,17 +8,47 @@ const CreateInstructorPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    // Load data from local storage when component mounts
-    const existingData = localStorage.getItem('instructors');
-    if (existingData) {
-      const parsedData = JSON.parse(existingData);
-      setInstructors(parsedData);
-    }
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/instructors');
+        const retrievedInstructors = await response.json();
+        setInstructors(retrievedInstructors);
+      } catch (error) {
+        console.error('Error retrieving instructors:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const handleFormSubmit = (instructor: Instructor) => {
-    setInstructors(prevInstructors => [...prevInstructors, instructor]);
-    setShowForm(false); // Hide the form after submitting
+  const handleFormSubmit = async (instructorData: { name: string; email: string }) => {
+    const instructor: Instructor = {
+      id: Date.now(),
+      name: instructorData.name,
+      email: instructorData.email,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3002/instructors', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(instructor),
+      });
+
+      if (response.ok) {
+        const createdInstructor = await response.json();
+        const updatedInstructors = [...instructors, createdInstructor];
+        setInstructors(updatedInstructors);
+        setShowForm(false);
+        saveToLocalStorage(updatedInstructors);
+      } else {
+        console.error('Error creating instructor:', response.status);
+      }
+    } catch (error) {
+      console.error('Error creating instructor:', error);
+    }
   };
 
   const toggleForm = () => {
@@ -47,8 +77,8 @@ const CreateInstructorPage: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {instructors.map(instructor => (
-            <tr key={instructor.id}>
+          {instructors.map((instructor,index) => (
+            <tr key={index}>
               <td>{instructor.id}</td>
               <td>{instructor.name}</td>
               <td>{instructor.email}</td>
