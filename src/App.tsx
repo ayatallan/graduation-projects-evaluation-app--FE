@@ -20,7 +20,10 @@ import RubricsAdminPage from './pages/AdminDashboard/rubrics/Rubrics.AdminPage';
 
 function App() {
   const [initialLocation, setInitialLocation] = useState('');
-
+  const [showSidebar, setShowSidebar] = useState(false);
+  const handleToggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
   useEffect(() => {
     setInitialLocation(window.location.pathname);
   }, []);
@@ -30,7 +33,7 @@ function App() {
     <div className="App">
    
       <BrowserRouter>
-         <MyNavbar />
+         <MyNavbar handleToggleSidebar={handleToggleSidebar}/>
         <Routes>
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage path={Path} />} />
@@ -39,7 +42,7 @@ function App() {
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />
           <Route path="/createGroup" element={<CreateGroup />} />
-          <Route path="/AdminDashboard" element={<MainDashboard/>}>
+          <Route path="/AdminDashboard" element={<MainDashboard  showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar}/>}>
             <Route path="StudentsPage" element={<StudentsPage />} />
             <Route path="InstructorsPage" element={<InstructorsPage/>} />
             <Route path="GroupsAdminPage" element={<GroupsAdminPage/>} />

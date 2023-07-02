@@ -5,18 +5,12 @@ import { useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import SideBar from "../admin-dashboard-sidebar/sideBar";
 
-const MyNavbar= () => {
- 
-  const [showSidebar, setShowSidebar] = useState(false);
-
-  const handleToggleSidebar = () => {
-    setShowSidebar(!showSidebar);
-  };
+const MyNavbar= (props : any) => {
 
   return (
     <div>
     <Navbar className="nav-bar">
-      <Navbar.Brand href="#" onClick={handleToggleSidebar}>
+      <Navbar.Brand  onClick={props.handleToggleSidebar}>
         ☰
       </Navbar.Brand>
       <Navbar.Collapse id="basic-navbar-nav">
@@ -24,7 +18,7 @@ const MyNavbar= () => {
      
       </Navbar.Collapse>
     </Navbar>  
-    {showSidebar && <SideBar />}
+  
     </div>
   );
 };
