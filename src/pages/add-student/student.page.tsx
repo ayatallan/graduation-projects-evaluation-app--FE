@@ -62,7 +62,6 @@ const CreateStudentPage: React.FC = () => {
       <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Major</th>
