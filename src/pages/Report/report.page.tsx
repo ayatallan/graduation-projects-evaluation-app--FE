@@ -1,15 +1,9 @@
 import React from 'react';
 import "./report.css";
+import { StudentReportInfo } from '../../interface';
 const ReportPage = () => {
-  interface Student {
-    id: number;
-    name: string;
-    groupName: string;
-    result: number;
-    instructorName: string;
-  }
-  
-  const students: Student[] = [
+
+  const students:StudentReportInfo [] = [
     {
       id: 1,
       name: "John Doe",

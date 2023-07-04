@@ -30,6 +30,14 @@ export interface Student {
   email: string;
   major: string;
 }
+ export interface StudentReportInfo {
+  id: number;
+  name: string;
+  groupName: string;
+  result: number;
+  instructorName: string;
+}
+
 export interface StudentFormProps {
   onSubmit: (student: Student) => void;
 }
