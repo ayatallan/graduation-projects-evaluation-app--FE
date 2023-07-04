@@ -76,6 +76,7 @@ function App() {
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />
           <Route path="/createGroup" element={<CreateGroup />} />
+          <Route path="/report" element={<ReportPage/>} />
         </Routes>
       </BrowserRouter>
     </div>
