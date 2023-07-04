@@ -20,8 +20,6 @@ const CreateGroup = () => {
     "Introduction",
     "Graduation Project"
   ]);
-
-  console.log("group", groups);
   
   useEffect(() => {
     fetchInstructors();
@@ -47,8 +45,6 @@ const CreateGroup = () => {
     try {
       const response = await fetch('http://localhost:3002/students');
       const retrievedStudents = await response.json();
-      // console.log('Retrieved Students:', retrievedStudents);
-
       setStudents(retrievedStudents);
     } catch (error) {
       console.error('Error retrieving students:', error);
@@ -71,18 +67,29 @@ const CreateGroup = () => {
     setShowForm(!showForm);
   };
 
+  const findStudent = (studentId: string) => {
+    const student = students.find((student) => student._id === studentId);
+    if (student) {
+      return student.name;
+    }
+    return '';
+  };
+
+  const findInstructor = (instructorId: any) => {
+    const instructor = instructors.find((instructors) => instructors._id === instructorId);
+    if (instructor) {
+      return instructor.name;
+    }
+    return '';
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedStudents.length >= 2 && selectedStudents.length <= 3 && groupName.trim() !== '') {
       const instructorName = instructors[index]?._id;
       const typeName = Class[indexType];
-    
-      console.log('Selected Students:', selectedStudents);
-
       const selectedStudentObjects = selectedStudents.map((selectedStudentId) =>
         students.find((student) => student._id === selectedStudentId)
       );
-      console.log('Selected Student Objects:', selectedStudentObjects);
 
       const group = {
         id: Date.now(),
@@ -91,9 +98,6 @@ const CreateGroup = () => {
         instructor: instructorName,
         type : typeName
       };
-
-      console.log('JSON:', JSON.stringify(group));
-
 
       try {
         const response = await fetch('http://localhost:3002/createGroup', {
@@ -105,11 +109,7 @@ const CreateGroup = () => {
         });
         if (response.ok) {
           const updatedGroupData = await response.json();
-          console.log("response",response);
-          
-          // console.log("prevGroups",groups);
           setGroups((prevGroups) => [...prevGroups, updatedGroupData]);
-          // console.log("after",groups);
           clearForm();
           setSubmit(true);
         } else {
@@ -140,8 +140,6 @@ const CreateGroup = () => {
     if (isChecked) {
       if (selectedStudents.length < 3) {
         setSelectedStudents((prevStudents) => [...prevStudents, studentId]);
-        console.log('Selected Students:', selectedStudents);
-
       } else {
         event.target.checked = false;
         alert('You can select at most three students');
@@ -179,7 +177,7 @@ const CreateGroup = () => {
             <Select
              name="Type"
              label="Type"
-             value={index}
+             value={indexType}
              onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndexType(Number(e.target.value))}
             >  
             {Class.map((ele , index) => 
@@ -224,15 +222,15 @@ const CreateGroup = () => {
               <Card.Body>
                 <Card.Title>{group.groupName}</Card.Title>
                 <Card.Text>
-                  <strong>Instructor: </strong> {group.instructor}
+                  <strong>Instructor: </strong> {findInstructor(group.instructor)}
                 </Card.Text>
                 <Card.Text>
                   <strong>Students:</strong>
                 </Card.Text>
                 <ul className="my-ul">
-                  {group.students.map((student : any, studentIndex : any) => (
+                  {group.students.map((student: any, studentIndex: number) => (
                     <li className="my-li" key={studentIndex} value={studentIndex}>
-                    {student}
+                      {findStudent(student)}
                     </li>
                   ))}
                 </ul>
