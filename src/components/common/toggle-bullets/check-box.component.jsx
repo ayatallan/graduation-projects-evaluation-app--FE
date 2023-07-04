@@ -11,7 +11,7 @@ const CheckBox = props => {
   const { label, ...inputProps } = props;
 
   return (
-    <div className="checkbox-group">            
+    <div className="checkbox-group">
       <input {...inputProps} type="checkbox" id={`chk-lbl-${label}`} />
       {
         label ? (

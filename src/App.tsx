@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
 import GroupsPage from './pages/Groups/Groups.pages';
-import EvaluationPage from './pages/Evaluation/Evaluation.page';
+import ReportPage from './pages/Report/report.page';
 
 import './App.css';
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
@@ -72,7 +72,7 @@ function App() {
           <Route path="/" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage />} />
           <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" />} />
-          <Route path="/Evaluation" element={<EvaluationPage />} />
+          <Route path="/Report" element={<ReportPage />} />
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />
           <Route path="/createGroup" element={<CreateGroup />} />

@@ -36,7 +36,7 @@ const SoftwareReport = (props: any) => {
 
 
 
-  
+
   const handleOptionSelect = (optionIndex: number) => {
     setSelectedOption(optionIndex);
   };
@@ -79,15 +79,15 @@ const SoftwareReport = (props: any) => {
             ...question,
             question: newQuestionText,
             options: newOptions,
-            weight: newWeight, 
+            weight: newWeight,
           };
         }
         return question;
       });
-  
+
       // Update local storage
       localStorage.setItem("questions", JSON.stringify(updatedData));
-  
+
       return updatedData;
     });
   };
@@ -117,7 +117,7 @@ const SoftwareReport = (props: any) => {
 
   const handleSaveEdit = () => {
     if (editingQuestionIndex !== null) {
-      updateQuestion(editingQuestionIndex, newQuestionText, newOptions,newWeight);
+      updateQuestion(editingQuestionIndex, newQuestionText, newOptions, newWeight);
       setEditingQuestionIndex(null);
       setNewQuestionText("");
       setNewOptions([]);
@@ -130,54 +130,61 @@ const SoftwareReport = (props: any) => {
   return (
     <>
       <p className="path">{props.path}</p>
-        <h2 className="project-name">Project Name</h2>
+      <h2 className="project-name">Project Name</h2>
+      {/* <div className="link">
+        <div className="btnn">
+          <Link to={'/add-questions'} className="quiz-btn " >
+            Add more
+          </Link>
+        </div>
+      </div> */}
       <div className="quiz-container">
         {quizData && quizData.length > 0 ? (
           <>
             {editingQuestionIndex !== null ? (
-       <div className="form-container">
-       <label htmlFor="questionText">Question Text:</label>
-       <input
-         type="text"
-         id="questionText"
-         value={newQuestionText}
-         onChange={(e) => setNewQuestionText(e.target.value)}
-       />
-     
-       <label htmlFor="weight">Weight:</label>
-       <input
-         type="number"
-         id="weight"
-         value={newWeight}
-         onChange={(e) => setNewWeight(Number(e.target.value))}
-       />
-     
-       <label htmlFor="options">Options:</label>
-       <ul>
-         {newOptions.map((option, index) => (
-           <li key={index + 1}>
-             <input
-               type="text"
-               value={option}
-               onChange={(e) => {
-                 const updatedOptions = [...newOptions];
-                 updatedOptions[index] = e.target.value;
-                 setNewOptions(updatedOptions);
-               }}
-             />
-           </li>
-         ))}
-       </ul>
-     
-       <button className="quiz-btn" onClick={handleSaveEdit}>
-         Save
-       </button>
-       <button className="quiz-btn" onClick={handleCancelEdit}>
-         Cancel
-       </button>
-     </div>
-     
-      
+              <div className="form-container">
+                <label htmlFor="questionText">Question Text:</label>
+                <input
+                  type="text"
+                  id="questionText"
+                  value={newQuestionText}
+                  onChange={(e) => setNewQuestionText(e.target.value)}
+                />
+
+                <label htmlFor="weight">Weight:</label>
+                <input
+                  type="number"
+                  id="weight"
+                  value={newWeight}
+                  onChange={(e) => setNewWeight(Number(e.target.value))}
+                />
+
+                <label htmlFor="options">Options:</label>
+                <ul>
+                  {newOptions.map((option, index) => (
+                    <li key={index + 1}>
+                      <input
+                        type="text"
+                        value={option}
+                        onChange={(e) => {
+                          const updatedOptions = [...newOptions];
+                          updatedOptions[index] = e.target.value;
+                          setNewOptions(updatedOptions);
+                        }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+
+                <button className="quiz-btn" onClick={handleSaveEdit}>
+                  Save
+                </button>
+                <button className="quiz-btn" onClick={handleCancelEdit}>
+                  Cancel
+                </button>
+              </div>
+
+
             ) : (
               <div>
                 <h3 className="quiz-question">

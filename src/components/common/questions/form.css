@@ -4,7 +4,7 @@
   max-width: 600px;
   margin: 1rem auto;
   padding: 30px;
-  background-color: #f5d3d3;
+  background-color: #D8F3DC;
   border-radius: 8px;
   box-shadow: 5px 5px 8px 3px rgba(0, 0, 0, 0.2);
 }
@@ -27,7 +27,7 @@
 .form>.box>.sub-box .form-input {
   width: 100%;
   padding: 10px;
-  border: 2px solid #b16c8b;
+  border: 2px solid #74C69D;
   border-radius: 4px;
   font-size: 16px;
   color: #333;
@@ -40,25 +40,17 @@
 
 .form>.box>.sub-box .form-input:focus {
   outline: none;
-  border-color: #FF69B4;
-  box-shadow: 0 0 4px #FF69B4;
+  background-color:#ffffff ;
+  
+  box-shadow: 0 0 4px #74C69D;
 }
 
-.form-button {
-  padding: 12px;
-  background-color: #b98a8a;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+
+.form>.form-button:hover {
+  background-color: #2D6A4F;
 }
 
-.form-button:hover {
-  background-color: #d48080;
-}
-
-.form-button:disabled {
+.form>.form-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
@@ -71,13 +63,22 @@
   display: flex;
   align-items: center;
   margin-bottom: 5px;
-  color: #FF1493;
+  color: #333;
 }
 
 .form-option-marker {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #FF1493;
+  background-color: #74C69D;
   margin-right: 8px;
+}
+.form>.form-button {
+  padding: 12px;
+  background-color:#74C69D ;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }

@@ -6,6 +6,7 @@ import '../../pages/add-instructor/instructor.css';
 const CreateInstructorPage: React.FC = () => {
   const [instructors, setInstructors] = useState<Instructor[]>([]);
   const [showForm, setShowForm] = useState(false);
+  const [showBG, setShowBG] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +44,8 @@ const CreateInstructorPage: React.FC = () => {
         setInstructors(updatedInstructors);
         setShowForm(false);
         saveToLocalStorage(updatedInstructors);
+        setShowBG(!showBG);
+
       } else {
         console.error('Error creating instructor:', response.status);
       }
@@ -53,6 +56,8 @@ const CreateInstructorPage: React.FC = () => {
 
   const toggleForm = () => {
     setShowForm(!showForm);
+    setShowBG(!showBG);
+
   };
 
   const saveToLocalStorage = (data: Instructor[]) => {
@@ -60,33 +65,35 @@ const CreateInstructorPage: React.FC = () => {
   };
 
   return (
-    <div className="wrapper">
-      <div className="btnn">
-        <button className="quiz-btn" onClick={toggleForm}>
-          Add Instructor
-        </button>
-      </div>
+    <>
+      <div className="wrapper">
+        <div className="btnn">
+          <button className="quiz-btn" onClick={toggleForm}>
+            Add Instructor
+          </button>
+        </div>
 
-      {showForm && <InstructorForm onSubmit={handleFormSubmit} />}
-      <table className="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {instructors.map((instructor,index) => (
-            <tr key={index}>
-              <td>{instructor.id}</td>
-              <td>{instructor.name}</td>
-              <td>{instructor.email}</td>
+        {showForm && <InstructorForm onSubmit={handleFormSubmit} />}
+        <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {instructors.map((instructor, index) => (
+              <tr key={index}>
+                <td>{instructor.id}</td>
+                <td>{instructor.name}</td>
+                <td>{instructor.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

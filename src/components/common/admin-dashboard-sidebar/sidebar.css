@@ -1,18 +1,22 @@
 .sidebar {
   margin: 0;
   padding: 0;
-  width: 210px;
-  background-color: #fce8e8;
+  width: 250px;
+  background-color: #b7e4c7;
   position: fixed;
   height: 100vh;
   overflow: auto;
   font-size: 18px;
+  border-right: 2px #577e6e;
+  box-shadow: -2px 4px 11px 3px #46534e;
+
 }
 
 .sidebar a {
   display: flex;
   align-items: center;
-  color: black;
+  color: white;
+  font-weight: 500;
   padding: 16px;
   text-decoration: none;
 }
@@ -20,8 +24,8 @@
 
 
 .sidebar a:hover:not(.active) {
-  background-color: #FFC2C2;
-  color: rgb(122, 60, 60);
+  background-color: #74c69d;
+  color: antiquewhite;
   border-radius: 5px;
 }
 
@@ -37,9 +41,7 @@
 
 .clicked {
   border-radius: 5px;
-
-  background-color: #ffc2c2;
-  color: rgb(122, 60, 60);
+  background-color: #577e6e;
   display: flex;
   align-items: center;
 }

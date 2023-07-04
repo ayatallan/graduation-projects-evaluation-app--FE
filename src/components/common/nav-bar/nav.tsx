@@ -19,7 +19,7 @@ const MyNavbar= (props : any) => {
       </Navbar.Collapse>
     </Navbar>  
     <div className="Side">
-    {props.showSidebar && <SideBar />}
+    {props.showSidebar && <SideBar showSidebar={props.showSidebar} setShowSidebar={props.setShowSidebar} handleToggleSidebar={props.handleToggleSidebar}  />}
 
     </div>
 

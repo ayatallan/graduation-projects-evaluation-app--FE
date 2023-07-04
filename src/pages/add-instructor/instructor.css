@@ -1,23 +1,29 @@
 .tit {
-    text-align: center;
-    font-weight: bold;
-    margin: 3rem;
+  text-align: center;
+  font-weight: bold;
+  margin: 3rem;
 }
 
 .form>.form-button {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 
-  .wrapper>.btnn {
-    display: flex;
-    align-items: center;
-    justify-content:  flex-end  ;
-    width: 100%;
+.wrapper>.btnn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 
-  }
+}
 
-.wrapper>.btnn>.quiz-btn  {
-    padding: .3rem;
+.wrapper>.btnn>.quiz-btn {
+  padding: .3rem;
+  background-color: #74C69D;
 
+
+}
+
+.table thead ,th, tr{
+  padding-left: 5rem;
 }
