@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./question.css";
 import { EditOutlined } from "@ant-design/icons";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { QuizQuestion } from "../../../interface";
 
 
@@ -24,15 +24,23 @@ const SoftwareReport = (props: any) => {
     fetchQuizData();
   }, []);
 
-  const fetchQuizData = async () => {
-    try {
-      const response = await fetch('http://localhost:3002/questions');
-      const data = await response.json();
-      setQuizData(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const location = useLocation();
+
+  useEffect(() => {
+    fetchQuizData();
+  }, []);
+const fetchQuizData = async () => {
+  try {
+    const searchParams = new URLSearchParams(location.search);
+    const groupType = searchParams.get('type');
+    const response = await fetch('http://localhost:3002/questions');
+    const data = await response.json();
+    const filteredData = data.filter((question: { Class: string | null; }) => question.Class === groupType);
+    setQuizData(filteredData);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
 
@@ -147,13 +155,13 @@ const SoftwareReport = (props: any) => {
     <>
       <p className="path">{props.path}</p>
       <h2 className="project-name">Project Name</h2>
-      {/* <div className="link">
+      <div className="link">
         <div className="btnn">
           <Link to={'/add-questions'} className="quiz-btn " >
             Add more
           </Link>
         </div>
-      </div> */}
+      </div>
       <div className="quiz-container">
         {quizData && quizData.length > 0 ? (
           <>
