@@ -4,6 +4,7 @@ import '../questions/form.css'
 import '../questions/question.css'
 const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
     const [instructor, setInstructor] = useState<Instructor>({
+        _id: '',
         id: Date.now(),
         name: '',
         email: ''
@@ -21,7 +22,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
         e.preventDefault();
         onSubmit(instructor);
         saveToLocalStorage(instructor); // Save instructor data to local storage
-        clearForm(); 
+        clearForm();
     };
 
     const saveToLocalStorage = (data: Instructor) => {
@@ -36,6 +37,8 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
 
     const clearForm = () => {
         setInstructor({
+            _id: '',
+
             id: 0,
             name: '',
             email: ''
@@ -45,31 +48,31 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
     return (
         <form className="form" onSubmit={handleSubmit}>
 
-                <label className="form-label" htmlFor="name">
-                    Name:
-                </label>
-                <input
-                    className="form-input"
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={instructor.name}
-                    onChange={handleChange}
-                    required
-                />
-          
-                <label className="form-label" htmlFor="email">
-                    Email:
-                </label>
-                <input
-                    className="form-input"
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={instructor.email}
-                    onChange={handleChange}
-                    required
-                />
+            <label className="form-label" htmlFor="name">
+                Name:
+            </label>
+            <input
+                className="form-input"
+                type="text"
+                id="name"
+                name="name"
+                value={instructor.name}
+                onChange={handleChange}
+                required
+            />
+
+            <label className="form-label" htmlFor="email">
+                Email:
+            </label>
+            <input
+                className="form-input"
+                type="email"
+                id="email"
+                name="email"
+                value={instructor.email}
+                onChange={handleChange}
+                required
+            />
             <button className="form-button " type="submit">Create Instructor</button>
         </form>
     );

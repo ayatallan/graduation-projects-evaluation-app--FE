@@ -5,6 +5,7 @@ import '../questions/question.css'
 
 const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
     const [student, setStudent] = useState<Student>({
+        _id : '',
         id: Date.now(),
         name: '',
         email: '',
@@ -27,6 +28,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
 
     const clearForm = () => {
         setStudent({
+            _id : '',
             id: Date.now(),
             name: '',
             email: '',

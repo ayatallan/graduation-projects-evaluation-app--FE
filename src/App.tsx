@@ -19,7 +19,6 @@ function App() {
     return savedQuestions ? JSON.parse(savedQuestions) : [];
   });
 
-  // const [initialLocation, setInitialLocation] = useState('');
   const [showSidebar, setShowSidebar] = useState(false);
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);

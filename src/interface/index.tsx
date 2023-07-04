@@ -21,11 +21,13 @@ export interface FormProps {
 }
 export interface Instructor {
   id: number;
+  _id: any;
   name: string;
   email: string;
 }
 export interface Student {
   id: number;
+  _id: string;
   name: string;
   email: string;
   major: string;
@@ -44,5 +46,8 @@ export interface StudentName {
   name: string;
 }
 export interface Group {
+  students: any;
+  instructor: string;
   groupName: string;
+  type : string;
 }
