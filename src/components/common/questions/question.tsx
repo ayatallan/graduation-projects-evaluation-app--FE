@@ -66,31 +66,47 @@ const SoftwareReport = (props: any) => {
     }
   };
 
-  const updateQuestion = (
+  const updateQuestion = async (
     questionIndex: number,
     newQuestionText: string,
     newOptions: string[],
     newWeight: number
   ) => {
-    setQuizData((prevQuizData) => {
-      const updatedData = prevQuizData.map((question, index) => {
-        if (index === questionIndex) {
-          return {
-            ...question,
+    const questionId = quizData[questionIndex]._id;
+  
+    try {
+      const response = await fetch(`http://localhost:3002/questions/${questionId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: newQuestionText,
+          options: newOptions,
+          weight: newWeight,
+        }),
+      });
+  
+      if (response.ok) {
+        setQuizData((prevQuizData) => {
+          const updatedData = [...prevQuizData];
+          updatedData[questionIndex] = {
+            ...updatedData[questionIndex],
             question: newQuestionText,
             options: newOptions,
             weight: newWeight,
           };
-        }
-        return question;
-      });
-
-      // Update local storage
-      localStorage.setItem("questions", JSON.stringify(updatedData));
-
-      return updatedData;
-    });
+  
+          return updatedData;
+        });
+      } else {
+        console.error('Failed to update question');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
 
   const submitQuiz = () => {
     console.log("Quiz submitted!");
