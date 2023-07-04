@@ -4,6 +4,7 @@ import '../questions/form.css'
 import '../questions/question.css'
 const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
     const [instructor, setInstructor] = useState<Instructor>({
+        _id : '',
         id: Date.now(),
         name: '',
         email: ''
@@ -36,6 +37,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ onSubmit }) => {
 
     const clearForm = () => {
         setInstructor({
+            _id : '',
             id: 0,
             name: '',
             email: ''

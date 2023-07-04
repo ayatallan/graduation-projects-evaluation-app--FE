@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Question {
   id: number
   question: string;
@@ -19,11 +21,13 @@ export interface FormProps {
   onSubmit: (question: string, options: string[], type: string, Class: string, weight: number) => void;
 }
 export interface Instructor {
+  _id: any;
   id: number;
   name: string;
   email: string;
 }
 export interface Student {
+  _id: string;
   id: number;
   name: string;
   email: string;
@@ -43,5 +47,7 @@ export interface StudentName {
   name: string;
 }
 export interface Group {
+  students: any;
+  instructor: string;
   groupName: string;
 }

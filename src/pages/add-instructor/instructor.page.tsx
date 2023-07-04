@@ -23,6 +23,7 @@ const CreateInstructorPage: React.FC = () => {
 
   const handleFormSubmit = async (instructorData: { name: string; email: string }) => {
     const instructor: Instructor = {
+      _id : '',
       id: Date.now(),
       name: instructorData.name,
       email: instructorData.email,
