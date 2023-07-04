@@ -50,4 +50,5 @@ export interface Group {
   students: any;
   instructor: string;
   groupName: string;
+  type : string;
 }

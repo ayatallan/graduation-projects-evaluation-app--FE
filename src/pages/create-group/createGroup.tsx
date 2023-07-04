@@ -9,12 +9,17 @@ const CreateGroup = () => {
   const [showForm, setShowForm] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [index, setIndex] = useState(-1);
+  const [indexType, setIndexType] = useState(-1);
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
   const [groupName, setGroupName] = useState('');
   const [groups, setGroups] = useState<Group[]>([]);
   const [instructors, setInstructors] = useState<Instructor[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [error, setError] = useState('');
+  const [Class, setClass] = useState<String[]>([
+    "Introduction",
+    "Graduation Project"
+  ]);
 
   console.log("group", groups);
   
@@ -70,6 +75,8 @@ const CreateGroup = () => {
     e.preventDefault();
     if (selectedStudents.length >= 2 && selectedStudents.length <= 3 && groupName.trim() !== '') {
       const instructorName = instructors[index]?._id;
+      const typeName = Class[indexType];
+    
       console.log('Selected Students:', selectedStudents);
 
       const selectedStudentObjects = selectedStudents.map((selectedStudentId) =>
@@ -82,6 +89,7 @@ const CreateGroup = () => {
         groupName,
         students: selectedStudentObjects,
         instructor: instructorName,
+        type : typeName
       };
 
       console.log('JSON:', JSON.stringify(group));
@@ -168,6 +176,18 @@ const CreateGroup = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setGroupName(e.target.value)}
               />
             </div>
+            <Select
+             name="Type"
+             label="Type"
+             value={index}
+             onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndexType(Number(e.target.value))}
+            >  
+            {Class.map((ele , index) => 
+            <option key={index} value={index}>
+              {ele}
+            </option>
+            )}
+            </Select>
             <Select
               name="instructor"
               label="Instructor"
