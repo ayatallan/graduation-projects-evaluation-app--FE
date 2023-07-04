@@ -119,6 +119,9 @@ const CreateGroup = () => {
           setGroups((prevGroups) => [...prevGroups, updatedGroupData]);
           clearForm();
           setSubmit(true);
+          setShowForm(false);
+          setShowBG(false)
+          
         } else {
           const errorData = await response.json();
           setError(errorData.error || 'Failed to create group');
