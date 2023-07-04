@@ -34,6 +34,7 @@ export interface Student {
   id: number;
   name: string;
   groupName: string;
+  projectName: string;
   result: number;
   instructorName: string;
 }

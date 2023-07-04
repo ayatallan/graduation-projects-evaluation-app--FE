@@ -8,6 +8,7 @@ const ReportPage = () => {
       id: 1,
       name: "John Doe",
       groupName: "Group A",
+      projectName:"project 1",
       result: 85,
       instructorName: "Jane Smith",
     },
@@ -15,6 +16,7 @@ const ReportPage = () => {
       id: 2,
       name: "Alice Johnson",
       groupName: "Group B",
+      projectName:"project 2",
       result: 92,
       instructorName: "Bob Anderson",
     },
@@ -28,6 +30,7 @@ const ReportPage = () => {
           <th>ID</th>
           <th>Name</th>
           <th>Group Name</th>
+          <th>Project Name</th>
           <th>Result</th>
           <th>Instructor Name</th>
         </tr>
@@ -38,6 +41,7 @@ const ReportPage = () => {
             <td>{student.id}</td>
             <td>{student.name}</td>
             <td>{student.groupName}</td>
+            <td>{student.projectName}</td>
             <td>{student.result}</td>
             <td>{student.instructorName}</td>
           </tr>
