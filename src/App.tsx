@@ -9,7 +9,7 @@ import './App.css';
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
 import CreateStudentPage from './pages/add-student/student.page';
 import CreateGroup from './pages/create-group/createGroup';
-import { Question } from './interface';
+import { Group, Question } from './interface';
 import SoftwareReport from './components/common/questions/question';
 import QuestionsForm from './components/common/questions/questions-form';
 
@@ -20,6 +20,7 @@ function App() {
   });
 
   const [showSidebar, setShowSidebar] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<Object>({});
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -71,8 +72,8 @@ function App() {
         <Routes>
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
           <Route path="/" element={<SignInPage />} />
-          <Route path="/Groups" element={<GroupsPage />} />
-          <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" />} />
+          <Route path="/Groups" element={<GroupsPage setSelectedGroup={setSelectedGroup} selectedGroup={selectedGroup}/>} />
+          <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions"  selectedGroup={selectedGroup}/>} />
           <Route path="/Report" element={<ReportPage />} />
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />

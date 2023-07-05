@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import Buttons from '../../components/common/buttons/buttons';
 import { Group } from '../../interface';
 
-const GroupsPage = () => {
+const GroupsPage = (props:any) => {
   const [groupData, setGroupData] = useState<Group[]>([]);
+
+  
 
   useEffect(() => {
     fetchGroups();
@@ -25,13 +27,19 @@ const GroupsPage = () => {
     }
   };
 
+  const click = (group : any) => {
+    props.setSelectedGroup(group)
+    console.log(group);
+    
+  }
+
   return (
     <>
       <p className="path">Groups Page</p>
       <div className="groups">
         {groupData?.map((group: Group, index: number) => (
-          <Link to={`/Questions?type=${group.type}&group=${group.groupName}`} key={index}>
-            <Buttons text={group.groupName} />
+          <Link to={`/Questions?type=${group.type}&group=${group.groupName}`} key={index} >
+            <button onClick={() => click(group)}>{group.groupName}</button>
           </Link>
         ))}
       </div>

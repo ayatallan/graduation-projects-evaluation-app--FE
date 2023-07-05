@@ -186,6 +186,7 @@ const SoftwareReport = (props: any) => {
       console.error('Failed to fetch groups:', error);
     }
   };
+
   const fetchMyStudent = async () => {
     try {
       const response = await fetch('http://localhost:3002/students');
@@ -196,13 +197,14 @@ const SoftwareReport = (props: any) => {
     }
 
   };
-  const findStudent = (studentId: string) => {
-    const student = students.find((student) => student._id === studentId);
+  const findStudent = () => {
+    const student = groupData.find((group) => group === props.selectedGroup);
     if (student) {
-      return student.name;
+      return student.students.map((student: any) => student.name).join(", ");
     }
     return '';
   };
+
 
   return (
     <>
@@ -272,25 +274,13 @@ const SoftwareReport = (props: any) => {
                     {/* ****************************************** */}
                     {
                       currentQuizQuestion.type == 'Personal Question' ?
-
                         <div className="small-text">
-
                           <div className="groups">
-                            {groupData?.map((group, groupIndex) => (
-                              <div key={groupIndex}>
-                                {group.students.map((student: any, studentIndex: number) => (
-                                  <li className="my-li" key={studentIndex} value={studentIndex}>
-                                    {findStudent(student)
-                                    }
-                                  </li>
-                                ))}
-                              </div>
-                            ))}
-
+                            {currentQuizQuestion.type === 'Personal Question' ? (
+                              <h1>{findStudent()}</h1>
+                            ) : null}
                           </div>
-
                         </div> : ""
-
                     }
 
                   </div>

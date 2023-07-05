@@ -46,6 +46,8 @@ export interface StudentName {
   name: string;
 }
 export interface Group {
+  _id: any;
+  id: any;
   students: any;
   instructor: string;
   groupName: string;
