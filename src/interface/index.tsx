@@ -59,3 +59,11 @@ export interface StudentReportInfo {
   result: number;
   instructorName: string;
 }
+
+export interface GroupInfo {
+  id: string;
+  groupName: string;
+  students: StudentReportInfo[];
+  instructor: string; 
+  type: string;
+}
