@@ -20,6 +20,9 @@ function App() {
   });
 
   const [showSidebar, setShowSidebar] = useState(false);
+  const [weightSum, setWeightSum] = useState<any>(0);
+  console.log(weightSum);
+  
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -72,8 +75,8 @@ function App() {
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
           <Route path="/" element={<SignInPage />} />
           <Route path="/Groups" element={<GroupsPage />} />
-          <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" />} />
-          <Route path="/Report" element={<ReportPage />} />
+          <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" setWeightSum={setWeightSum} weightSum={weightSum}/>} />
+          <Route path="/Report" element={<ReportPage weightSum={weightSum}/>} />
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />
           <Route path="/createGroup" element={<CreateGroup />} />

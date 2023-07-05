@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import "./report.css";
 import { GroupInfo, Instructor, Student } from '../../interface';
 
-const ReportPage = () => {
+type ReportPageProps = {
+  weightSum: number;
+};
+
+const ReportPage: React.FC<ReportPageProps> = ({ weightSum }) => {
   const [groups, setGroups] = useState<GroupInfo[]>([]);
   const [instructors, setInstructors] = useState<Instructor[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
@@ -84,7 +88,7 @@ const ReportPage = () => {
                 <tr key={index}>
                     <td>{index + 1}</td>
                   <td>{findStudent(student)}</td>
-                  <td>{student.result}</td>
+                  <td>{weightSum}</td>
                 </tr>
               ))}
             </tbody>

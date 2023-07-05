@@ -6,7 +6,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { QuizQuestion } from "../../../interface";
 
 
-const SoftwareReport = (props: any) => {
+type Props = {
+  weightSum: number;
+  quizData : any,
+  path : any,
+  setWeightSum : Function
+};
+
+const SoftwareReport: React.FC<Props> = (props) => {
+
+
   const navigate = useNavigate();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -65,6 +74,7 @@ const SoftwareReport = (props: any) => {
       setSelectedOption(null);
     } else {
       submitQuiz();
+      navigate('/report');
     }
   };
 
@@ -72,7 +82,9 @@ const SoftwareReport = (props: any) => {
     if (selectedOption === quizData[currentQuestion].answer) {
       setScore((prevScore) => prevScore + 1);
     }
+    props.setWeightSum((prevWeightSum : any) => prevWeightSum + quizData[currentQuestion].weight);
   };
+  
 
   const updateQuestion = async (
     questionIndex: number,
