@@ -12,6 +12,9 @@ const CreateGroup = () => {
   const [index, setIndex] = useState(0);
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
   const [groupName, setGroupName] = useState('');
+  const dataJson: any = localStorage.getItem('instructors');
+  const data: Name[] = JSON.parse(dataJson);
+
   const [indexType, setIndexType] = useState(-1);
   const [groups, setGroups] = useState<Group[]>([]);
   const [instructors, setInstructors] = useState<Instructor[]>([]);
@@ -203,9 +206,10 @@ const CreateGroup = () => {
               className="my-input"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
             >
-            {instructors?.map((instructor, index) => (
-                <option key={index} value={index}>
-                  {instructor.name}
+              {data?.map((data: Name, index: number) => (
+
+                <option key={index} value={index} >
+                  {data.name}
                 </option>
               ))}
             </Select>

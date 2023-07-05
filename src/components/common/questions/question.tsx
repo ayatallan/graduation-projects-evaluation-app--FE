@@ -3,7 +3,7 @@ import "./question.css";
 import { EditOutlined } from "@ant-design/icons";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { QuizQuestion } from "../../../interface";
+import { Group, QuizQuestion, Student } from "../../../interface";
 
 
 const SoftwareReport = (props: any) => {
@@ -42,7 +42,24 @@ const SoftwareReport = (props: any) => {
     }
   };
 
+  const [students, setStudents] = useState<Student[]>([]);
 
+  const fetchStudents = async () => {
+    try {
+      const searchParams = new URLSearchParams(location.search);
+      const groupType = searchParams.get('group');
+      const response = await fetch(`http://localhost:3002/students?group=${groupType}`);
+      const data = await response.json();
+      setStudents(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudents();
+    fetchMyStudent();
+  }, []);
 
 
   const handleOptionSelect = (optionIndex: number) => {
@@ -121,7 +138,7 @@ const SoftwareReport = (props: any) => {
     navigate("/Forms");
 
     // Update local storage with final quiz data
-    localStorage.setItem("quizData", JSON.stringify(quizData));
+    // localStorage.setItem("quizData", JSON.stringify(quizData));
   };
 
   const handleEditClick = (questionIndex: number) => {
@@ -150,6 +167,42 @@ const SoftwareReport = (props: any) => {
   };
 
   const currentQuizQuestion = quizData[currentQuestion];
+  const [groupData, setGroupData] = useState<Group[]>([]);
+
+  useEffect(() => {
+    fetchGroups();
+  }, []);
+
+  const fetchGroups = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/createGroup');
+      if (response.ok) {
+        const data = await response.json();
+        setGroupData(data);
+      } else {
+        console.error('Failed to fetch groups');
+      }
+    } catch (error) {
+      console.error('Failed to fetch groups:', error);
+    }
+  };
+  const fetchMyStudent = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/students');
+      const retrievedStudents = await response.json();
+      setStudents(retrievedStudents);
+    } catch (error) {
+      console.error('Error retrieving students:', error);
+    }
+
+  };
+  const findStudent = (studentId: string) => {
+    const student = students.find((student) => student._id === studentId);
+    if (student) {
+      return student.name;
+    }
+    return '';
+  };
 
   return (
     <>
@@ -216,6 +269,29 @@ const SoftwareReport = (props: any) => {
                     <EditOutlined size={30} onClick={() => handleEditClick(currentQuestion)} />
                     <span className="question-text">{currentQuizQuestion.question}</span>
                     {currentQuizQuestion.type == 'Personal Question' ? <div className="small">"Personal"</div> : null}
+                    {/* ****************************************** */}
+                    {
+                      currentQuizQuestion.type == 'Personal Question' ?
+
+                        <div className="small-text">
+
+                          <div className="groups">
+                            {groupData?.map((group, groupIndex) => (
+                              <div key={groupIndex}>
+                                {group.students.map((student: any, studentIndex: number) => (
+                                  <li className="my-li" key={studentIndex} value={studentIndex}>
+                                    {findStudent(student)
+                                    }
+                                  </li>
+                                ))}
+                              </div>
+                            ))}
+
+                          </div>
+
+                        </div> : ""
+
+                    }
 
                   </div>
                   <span className="question-text">{currentQuizQuestion.weight} %</span>

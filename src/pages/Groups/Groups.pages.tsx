@@ -30,7 +30,7 @@ const GroupsPage = () => {
       <p className="path">Groups Page</p>
       <div className="groups">
         {groupData?.map((group: Group, index: number) => (
-          <Link to={`/Questions?type=${group.type}`} key={index}>
+          <Link to={`/Questions?type=${group.type}&group=${group.groupName}`} key={index}>
             <Buttons text={group.groupName} />
           </Link>
         ))}
