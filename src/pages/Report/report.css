@@ -6,7 +6,10 @@
     width: 100%;
     border-collapse: collapse;
   }
-  
+  p {
+    display: inline;
+    margin: 20px;
+  }
   .student-table th,
   .student-table td {
     border: 1px solid #ccc;
