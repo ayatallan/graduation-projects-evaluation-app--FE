@@ -1,4 +1,28 @@
-.g1 {
-    background-color: rgb(79, 130, 79);
-
-}
+.student-table-container {
+    margin: 20px;
+  }
+  
+  .student-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .student-table th,
+  .student-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  .student-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .student-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .student-table tbody tr:hover {
+    background-color: #eaeaea;
+  }
+  

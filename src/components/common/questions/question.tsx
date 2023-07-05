@@ -29,18 +29,18 @@ const SoftwareReport = (props: any) => {
   useEffect(() => {
     fetchQuizData();
   }, []);
-const fetchQuizData = async () => {
-  try {
-    const searchParams = new URLSearchParams(location.search);
-    const groupType = searchParams.get('type');
-    const response = await fetch('http://localhost:3002/questions');
-    const data = await response.json();
-    const filteredData = data.filter((question: { Class: string | null; }) => question.Class === groupType);
-    setQuizData(filteredData);
-  } catch (error) {
-    console.error(error);
-  }
-};
+  const fetchQuizData = async () => {
+    try {
+      const searchParams = new URLSearchParams(location.search);
+      const groupType = searchParams.get('type');
+      const response = await fetch('http://localhost:3002/questions');
+      const data = await response.json();
+      const filteredData = data.filter((question: { Class: string | null; }) => question.Class === groupType);
+      setQuizData(filteredData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 
 
@@ -81,7 +81,7 @@ const fetchQuizData = async () => {
     newWeight: number
   ) => {
     const questionId = quizData[questionIndex]._id;
-  
+
     try {
       const response = await fetch(`http://localhost:3002/questions/${questionId}`, {
         method: 'PUT',
@@ -94,7 +94,7 @@ const fetchQuizData = async () => {
           weight: newWeight,
         }),
       });
-  
+
       if (response.ok) {
         setQuizData((prevQuizData) => {
           const updatedData = [...prevQuizData];
@@ -104,7 +104,7 @@ const fetchQuizData = async () => {
             options: newOptions,
             weight: newWeight,
           };
-  
+
           return updatedData;
         });
       } else {
@@ -114,7 +114,7 @@ const fetchQuizData = async () => {
       console.error(error);
     }
   };
-  
+
 
   const submitQuiz = () => {
     console.log("Quiz submitted!");
@@ -215,10 +215,12 @@ const fetchQuizData = async () => {
                   <div>
                     <EditOutlined size={30} onClick={() => handleEditClick(currentQuestion)} />
                     <span className="question-text">{currentQuizQuestion.question}</span>
+                    {currentQuizQuestion.type == 'Personal Question' ? <div className="small">"Personal"</div> : null}
+
                   </div>
                   <span className="question-text">{currentQuizQuestion.weight} %</span>
-
                 </h3>
+
                 <ul>
                   {currentQuizQuestion.options.map((option, index) => (
                     <li

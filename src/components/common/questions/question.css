@@ -181,3 +181,8 @@ a {
   padding: 20px;
   box-shadow: 6px 5px 9px 0px #938486;
 }
+.small{
+  color: #337d5c;
+  font-size: small;
+  font-weight: bold;
+}

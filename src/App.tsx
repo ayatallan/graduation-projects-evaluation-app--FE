@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
@@ -23,6 +23,7 @@ function App() {
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+  // const navigate=useNavigate();
 
   const handleSubmit = async (
     question: string,
@@ -56,6 +57,7 @@ function App() {
       const data = await response.json();
       setQuestions((prevQuestions) => [...prevQuestions, data]);
     } catch (error) {
+      // navigate('./Questions')
       console.error(error);
     }
   };

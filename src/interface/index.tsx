@@ -51,3 +51,11 @@ export interface Group {
   groupName: string;
   type : string;
 }
+export interface StudentReportInfo {
+  id: number;
+  name: string;
+  groupName: string;
+  projectName: string;
+  result: number;
+  instructorName: string;
+}
