@@ -1,13 +1,22 @@
+
+.main-btns {
+    display: flex;
+    align-items: center;
+    width: 50rem;
+    max-width: 30rem;
+}
 .btn{
     background-color:#74C69D ;
     padding: 1rem;
     margin: 0.5rem;
     border: none;
-    color: #000000;
 }
+.btn:hover{
+    background-color:#1B4332 ;
 
-.main-btns {
-    width: 50%;
-    display: flex;
-    align-items: center;
+}
+.type{
+    font-size: small;
+    color: #bfd5c2;
+    text-shadow: 1px 1px 1px #ccded2;
 }

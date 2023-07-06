@@ -4,6 +4,7 @@ import { EditOutlined } from "@ant-design/icons";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { QuizQuestion } from "../../../interface";
+import { log } from "console";
 
 
 const SoftwareReport = (props: any) => {
@@ -137,6 +138,7 @@ const SoftwareReport = (props: any) => {
     setNewQuestionText("");
     setNewOptions([]);
     setNewWeight(0);
+
   };
 
   const handleSaveEdit = () => {
@@ -150,6 +152,8 @@ const SoftwareReport = (props: any) => {
   };
 
   const currentQuizQuestion = quizData[currentQuestion];
+  console.log('currentQuizQuestion,', currentQuizQuestion);
+
 
   return (
     <>
@@ -174,7 +178,6 @@ const SoftwareReport = (props: any) => {
                   value={newQuestionText}
                   onChange={(e) => setNewQuestionText(e.target.value)}
                 />
-
                 <label htmlFor="weight">Weight:</label>
                 <input
                   type="number"

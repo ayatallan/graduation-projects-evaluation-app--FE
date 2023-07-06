@@ -175,11 +175,12 @@ a {
 }
 
 .form-container {
-  background-color: #f5ecec;
-  border: 1px solid #ccc;
+  background-color: hsl(141, 45%, 81%);
+  border: 1px solid #95D5B2;
   border-radius: 4px;
   padding: 20px;
-  box-shadow: 6px 5px 9px 0px #938486;
+  box-shadow: 6px 5px 9px 0px #a9b1aa;
+
 }
 .small{
   color: #337d5c;

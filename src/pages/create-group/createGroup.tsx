@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import './createGroup.css';
 import { Group, Instructor, Name, Student, StudentName } from '../../interface';
 import { Card } from 'react-bootstrap';
-import Select from '../../components/select/select.component';
+import Select from '../../components/common/select/select.component';
 import CheckBox from '../../components/common/toggle-bullets/check-box.component';
 
 const CreateGroup = () => {

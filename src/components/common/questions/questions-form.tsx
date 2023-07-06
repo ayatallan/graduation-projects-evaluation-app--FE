@@ -45,55 +45,55 @@ const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
 
   return (
     <>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="box">
-        <div className="sub-box">
-          
 
-          <label className="form-label">
-            Question:
-            <input required className="form-input" type="text" value={question} onChange={handleQuestionChange} />
-          </label>
-          <br />
-          {options.map((option, index) => (
-            <label key={index} className="form-label">
-              Option {index + 1}:
-              <input required className="form-input" type="text" value={option} onChange={(e) => handleOptionChange(e, index)} />
-            </label>
+      <div className='f-con'>
+        <span className='g'>Please Fill All Inputs to Add a question ! </span>
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="box">
+            <div className="sub-box">
 
+              <label className="form-label">
+                Question:
+                <input required className="form-input" type="text" value={question} onChange={handleQuestionChange} />
+              </label>
+              <br />
+              {options.map((option, index) => (
+                <label key={index} className="form-label">
+                  Option {index + 1}:
+                  <input required className="form-input" type="text" value={option} onChange={(e) => handleOptionChange(e, index)} />
+                </label>
+              ))}
+            </div>
+            <br />
 
+            <div className="sub-box">
 
-          ))}
-</div>
-          <br />
+              <label className="form-label">
+                Weight:
+                <input className="form-input" required type="number" value={weight} onChange={handleWeightChange} />
+              </label>
+              <label className="form-label">
+                Class:
+                <input className="form-input" required type="text" value={Class} onChange={handleClassChange} />
+              </label>
+              <label className="form-label">
+                Type:
+                <select className="form-input" required value={type} onChange={handleTypeChange}>
+                  <option value="" disabled>
+                    Select type
+                  </option>
+                  <option value="Personal Question">Personal Question</option>
+                  <option value="Public">Public</option>
+                </select>
+              </label>
+            </div>
 
-          <div className="sub-box">
-
-          <label className="form-label">
-            Weight:
-            <input className="form-input" required type="number" value={weight} onChange={handleWeightChange} />
-          </label>
-          <label className="form-label">
-            Class:
-            <input className="form-input" required type="text" value={Class} onChange={handleClassChange} />
-          </label>
-          <label className="form-label">
-            Type:
-            <select className="form-input" required value={type} onChange={handleTypeChange}>
-              <option value="" disabled>
-                Select type
-              </option>
-              <option value="Personal Question">Personal Question</option>
-              <option value="Public">Public</option>
-            </select>
-          </label>
           </div>
-
-        </div>
-        <button className="form-button" type="submit">
-          Submit
-        </button>
-      </form>
+          <button className="form-button" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
     </>
   );
 };
