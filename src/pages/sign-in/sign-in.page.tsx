@@ -29,7 +29,7 @@ const SignInPage = (props: any) => {
       if (res.ok) {
         setRes(response);
         console.log('User created successfully');
-        navigate('/Home');
+        navigate('/groups');
       } else {
         console.log('Error occurred while creating the user');
       }
@@ -46,6 +46,7 @@ const SignInPage = (props: any) => {
     console.log(error);
   };
 
+
   return (
     <div className="container1">
       <div className="ImageSignUpPage">
@@ -59,7 +60,7 @@ const SignInPage = (props: any) => {
       <div className="click">Click Here To Login</div>
       <div className="SignUpButton">
         <div>
-          <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
+          <GoogleOAuthProvider clientId={'17534540626-lvfagtcvme0aj8cpv83cbund5akg6cqs.apps.googleusercontent.com'}>
             <GoogleLogin onSuccess={responseMessage} onError={() => errorMessage || undefined} />
           </GoogleOAuthProvider>
         </div>
