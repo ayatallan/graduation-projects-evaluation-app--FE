@@ -197,10 +197,24 @@ const SoftwareReport = (props: any) => {
     }
 
   };
-  const findStudent = () => {
-    const student = groupData.find((group) => group === props.selectedGroup);
+
+  const findStudent1 = (studentId: string) => {
+    const student = students.find((student) => student._id === studentId);
     if (student) {
-      return student.students.map((student: any) => student.name).join(", ");
+      return student.name;
+    }
+    return '';
+  };
+
+  const findStudent = () => {
+    const group = groupData.find((group) => group._id === props.selectedGroup?._id);
+    console.log("props.selectedGroup",props.selectedGroup);
+    console.log("groupData",groupData);
+    
+    if (group) {
+      console.log("student",group);
+      
+      return group.students.map((student: any) => findStudent1(student)).join(", ");
     }
     return '';
   };
