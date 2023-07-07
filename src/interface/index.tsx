@@ -4,7 +4,8 @@ export interface Question {
   options: string[];
   type: string;
   Class: string;
-  weight: number
+  weight: number;
+  marks: number[]
 }
 export interface QuizQuestion {
   studentInput: string;
@@ -18,8 +19,16 @@ export interface QuizQuestion {
   answer: number;
 }
 export interface FormProps {
-  onSubmit: (question: string, options: string[], type: string, Class: string, weight: number) => void;
+  onSubmit: (
+    question: string,
+    options: string[],
+    type: string,
+    Class: string,
+    weight: number,
+    marks: number[]
+  ) => void;
 }
+
 export interface Instructor {
   id: number;
   _id: any;

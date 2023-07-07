@@ -31,39 +31,39 @@ function App() {
     options: string[],
     type: string,
     Class: string,
-    weight: number
+    weight: number,
+    marks: number[]
   ) => {
-    const newQuestion: Question = {
+    const questionData: Question = {
       id: Date.now(),
       question: question,
       options: options,
       type: type,
       Class: Class,
       weight: weight,
+      marks: marks,
     };
-
+  
     try {
       const response = await fetch('http://localhost:3002/questions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newQuestion),
+        body: JSON.stringify(questionData),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to add question');
       }
-
+  
       const data = await response.json();
       setQuestions((prevQuestions) => [...prevQuestions, data]);
     } catch (error) {
-      // navigate('./Questions')
       console.error(error);
     }
   };
-
-
+  
 
   return (
     <div className="App">
@@ -82,6 +82,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+  }
 
 export default App;
