@@ -4,7 +4,12 @@ import { FormProps } from '../../../interface';
 
 const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
   const [question, setQuestion] = useState('');
-  const [options, setOptions] = useState<string[]>(['', '', '', '']);
+  const [options, setOptions] = useState<{ option: string; weight: number }[]>([
+    { option: '', weight: 0 },
+    { option: '', weight: 0 },
+    { option: '', weight: 0 },
+    { option: '', weight: 0 },
+  ]);
   const [type, setType] = useState('');
   const [weight, setWeight] = useState(0);
   const [Class, setClass] = useState('');
@@ -15,7 +20,7 @@ const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const updatedOptions = [...options];
-    updatedOptions[index] = e.target.value;
+    updatedOptions[index].option = e.target.value;
     setOptions(updatedOptions);
   };
 
@@ -40,55 +45,77 @@ const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
     setWeight(0);
     setClass('');
     setQuestion('');
-    setOptions(['', '', '', '']);
+    setOptions([
+      { option: '', weight: 0 },
+      { option: '', weight: 0 },
+      { option: '', weight: 0 },
+      { option: '', weight: 0 },
+    ]);
   };
 
   return (
     <>
       <form className="form" onSubmit={handleSubmit}>
         <div className="box">
-        <div className="sub-box">
-          
-
-          <label className="form-label">
-            Question:
-            <input required className="form-input" type="text" value={question} onChange={handleQuestionChange} />
-          </label>
-          <br />
-          {options.map((option, index) => (
-            <label key={index} className="form-label">
-              Option {index + 1}:
-              <input required className="form-input" type="text" value={option} onChange={(e) => handleOptionChange(e, index)} />
+          <div className="sub-box">
+            <label className="form-label">
+              Question:
+              <input
+                required
+                className="form-input"
+                type="text"
+                value={question}
+                onChange={handleQuestionChange}
+              />
             </label>
-
-
-
-          ))}
-</div>
+            <br />
+            {options.map((option, index) => (
+              <label key={index} className="form-label">
+                Option {index + 1}:
+                <input
+                  required
+                  className="form-input"
+                  type="text"
+                  value={option.option}
+                  onChange={(e) => handleOptionChange(e, index)}
+                />
+              </label>
+            ))}
+          </div>
           <br />
 
           <div className="sub-box">
-
-          <label className="form-label">
-            Weight:
-            <input className="form-input" required type="number" value={weight} onChange={handleWeightChange} />
-          </label>
-          <label className="form-label">
-            Class:
-            <input className="form-input" required type="text" value={Class} onChange={handleClassChange} />
-          </label>
-          <label className="form-label">
-            Type:
-            <select className="form-input" required value={type} onChange={handleTypeChange}>
-              <option value="" disabled>
-                Select type
-              </option>
-              <option value="Personal Question">Personal Question</option>
-              <option value="Public">Public</option>
-            </select>
-          </label>
+            <label className="form-label">
+              Weight:
+              <input
+                className="form-input"
+                required
+                type="number"
+                value={weight}
+                onChange={handleWeightChange}
+              />
+            </label>
+            <label className="form-label">
+              Class:
+              <input
+                className="form-input"
+                required
+                type="text"
+                value={Class}
+                onChange={handleClassChange}
+              />
+            </label>
+            <label className="form-label">
+              Type:
+              <select className="form-input" required value={type} onChange={handleTypeChange}>
+                <option value="" disabled>
+                  Select type
+                </option>
+                <option value="Personal Question">Personal Question</option>
+                <option value="Public">Public</option>
+              </select>
+            </label>
           </div>
-
         </div>
         <button className="form-button" type="submit">
           Submit

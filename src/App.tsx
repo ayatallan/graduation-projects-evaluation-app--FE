@@ -28,15 +28,19 @@ function App() {
 
   const handleSubmit = async (
     question: string,
-    options: string[],
+    options: { option: string; weight: number; }[],
     type: string,
     Class: string,
     weight: number
   ) => {
+    const newOptions = options?.map((option, index) => ({
+      option: option.option,
+      weight: index + 1, // Set the weight equal to the index + 1
+    }));
     const newQuestion: Question = {
       id: Date.now(),
       question: question,
-      options: options,
+      options: newOptions,
       type: type,
       Class: Class,
       weight: weight,

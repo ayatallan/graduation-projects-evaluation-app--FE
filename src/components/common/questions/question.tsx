@@ -3,30 +3,32 @@ import "./question.css";
 import { EditOutlined } from "@ant-design/icons";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Group, QuizQuestion, Student, StudentName } from "../../../interface";
+import { QuizQuestion, Student } from "../../../interface";
 
 
 const SoftwareReport = (props: any) => {
   const navigate = useNavigate();
-  
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [quizData, setQuizData] = useState<QuizQuestion[]>(props.quizData);
   const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
   const [newQuestionText, setNewQuestionText] = useState("");
-  const [newOptions, setNewOptions] = useState<string[]>([]);
+  const [newOptions, setNewOptions] = useState<{ option: string; weight: number }[]>([]);
   const [newWeight, setNewWeight] = useState(0);
   const [students, setStudents] = useState<Student[]>([]);
   const [storeStudentsName, setStoreStudentsName] = useState<String[]>([]);
   const location = useLocation();
-  
+  console.log(quizData);
+
+
   useEffect(() => {
     fetchQuizData();
     fetchStudents();
     fetchGroups();
   }, []);
-  
+
   useEffect(() => {
     storeStudent();
   }, [students]);
@@ -35,7 +37,7 @@ const SoftwareReport = (props: any) => {
     const searchParams = new URLSearchParams(location.search);
     const element = searchParams.get("student");
     const studentArray = element ? element.split(',') : [];
-    console.log("student",studentArray);
+    console.log("student", studentArray);
     setStoreStudentsName(studentArray);
   }, [location.search]);
 
@@ -68,14 +70,14 @@ const SoftwareReport = (props: any) => {
     }
   };
 
-  const storeStudent = async () => { 
+  const storeStudent = async () => {
     try {
       const response = await fetch("http://localhost:3002/studentsName", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({Myname: storeStudentsName}),
+        body: JSON.stringify({ Myname: storeStudentsName }),
       });
       if (response.ok) {
         console.log("Student stored successfully!");
@@ -120,7 +122,7 @@ const SoftwareReport = (props: any) => {
   const updateQuestion = async (
     questionIndex: number,
     newQuestionText: string,
-    newOptions: string[],
+    newOptions: { option: string; weight: number }[],
     newWeight: number
   ) => {
     const questionId = quizData[questionIndex]._id;
@@ -244,10 +246,10 @@ const SoftwareReport = (props: any) => {
                     <li key={index + 1}>
                       <input
                         type="text"
-                        value={option}
+                        value={option.option}
                         onChange={(e) => {
                           const updatedOptions = [...newOptions];
-                          updatedOptions[index] = e.target.value;
+                          updatedOptions[index].option = e.target.value;
                           setNewOptions(updatedOptions);
                         }}
                       />
@@ -270,46 +272,50 @@ const SoftwareReport = (props: any) => {
                   <div>
                     <EditOutlined size={30} onClick={() => handleEditClick(currentQuestion)} />
                     <span className="question-text">{currentQuizQuestion.question}</span>
-                    {currentQuizQuestion.type == 'Personal Question' ? <div className="small">"Personal"</div> : null}
-                    {currentQuizQuestion.type == 'Personal Question' ?
-                      <div className="small-text">
-                        <div className="groups">
-                          {currentQuizQuestion.type === 'Personal Question' ? (
-                            <h1>{storeStudentsName.map((s,ind) =>
-                               <div key={ind}>
-                                {s}
-                                <input className="student-input"/>
-                               </div>)}</h1>
-                          ) : null}
-                        </div>
-                      </div> : ""
-                    }
+                    {currentQuizQuestion.type === 'Personal Question' ? <div className="small">"Personal"</div> : null}
                   </div>
                   <span className="question-text">{currentQuizQuestion.weight} %</span>
                 </h3>
 
                 <ul>
-                  {currentQuizQuestion.type === 'Personal Question' ? '' :
-                  currentQuizQuestion.options.map((option, index) => (
-                    <li
-                      key={index + 1}
-                      className={selectedOption === index ? "selected-option" : ""}
-                      onClick={() => handleOptionSelect(index)}
-                    >
-                      <label>
-                        <input
-                          type="radio"
-                          name="option"
-                          checked={selectedOption === index}
-                          onChange={() => handleOptionSelect(index)}
-                        />
-                        {option}
-                      </label>
-                    </li>
-                  ))}
+                  {currentQuizQuestion.type === 'Personal Question' ? (
+                    <div className="small-text">
+                      <div className="groups">
+                        {currentQuizQuestion.type === 'Personal Question' ? (
+                          <h1>
+                            {storeStudentsName.map((s, ind) => (
+                              <div key={ind}>
+                                {s}
+                                <input className="student-input" />
+                              </div>
+                            ))}
+                          </h1>
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : (
+                    currentQuizQuestion.options.map((op, index) => (
+                      <li
+                        key={index + 1}
+                        className={selectedOption === index ? "selected-option" : ""}
+                        onClick={() => handleOptionSelect(index)}
+                      >
+                        <label>
+                          <input
+                            type="radio"
+                            name="option"
+                            checked={selectedOption === index}
+                            onChange={() => handleOptionSelect(index)}
+                          />
+                          Option: {op.option}
+                        </label>
+                      </li>
+                    ))
+                  )}
                 </ul>
               </div>
             )}
+
             <div className="pre-next">
               {currentQuestion !== 0 && (
                 <button className="quiz-btn" onClick={handlePrevious} disabled={currentQuestion === 0}>
