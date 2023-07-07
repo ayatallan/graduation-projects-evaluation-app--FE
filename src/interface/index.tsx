@@ -7,6 +7,7 @@ export interface Question {
   weight: number
 }
 export interface QuizQuestion {
+  studentInput: string;
   _id: string,
   id: Number,
   question: string;

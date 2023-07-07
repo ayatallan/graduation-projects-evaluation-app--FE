@@ -7,7 +7,11 @@
   margin: 0 auto;
   padding: 20px;
 }
-
+.student-input {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+}
 .quiz-container h2 {
   text-align: center;
 }

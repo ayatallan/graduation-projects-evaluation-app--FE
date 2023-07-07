@@ -3,32 +3,42 @@ import "./question.css";
 import { EditOutlined } from "@ant-design/icons";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Group, QuizQuestion, Student } from "../../../interface";
+import { Group, QuizQuestion, Student, StudentName } from "../../../interface";
 
 
 const SoftwareReport = (props: any) => {
   const navigate = useNavigate();
-
+  
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [quizData, setQuizData] = useState<QuizQuestion[]>(props.quizData);
-
   const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
   const [newQuestionText, setNewQuestionText] = useState("");
   const [newOptions, setNewOptions] = useState<string[]>([]);
   const [newWeight, setNewWeight] = useState(0);
-
-
-  useEffect(() => {
-    fetchQuizData();
-  }, []);
-
+  const [students, setStudents] = useState<Student[]>([]);
+  const [storeStudentsName, setStoreStudentsName] = useState<String[]>([]);
   const location = useLocation();
-
+  
   useEffect(() => {
     fetchQuizData();
+    fetchStudents();
+    fetchGroups();
   }, []);
+  
+  useEffect(() => {
+    storeStudent();
+  }, [students]);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const element = searchParams.get("student");
+    const studentArray = element ? element.split(',') : [];
+    console.log("student",studentArray);
+    setStoreStudentsName(studentArray);
+  }, [location.search]);
+
   const fetchQuizData = async () => {
     try {
       const searchParams = new URLSearchParams(location.search);
@@ -42,13 +52,15 @@ const SoftwareReport = (props: any) => {
     }
   };
 
-  const [students, setStudents] = useState<Student[]>([]);
 
   const fetchStudents = async () => {
     try {
       const searchParams = new URLSearchParams(location.search);
-      const groupType = searchParams.get('group');
-      const response = await fetch(`http://localhost:3002/students?group=${groupType}`);
+      const groupType = searchParams.get("group");
+      const studentGroup = searchParams.get("student");
+      const response = await fetch(
+        `http://localhost:3002/students?group=${groupType}&&student=${studentGroup}`
+      );
       const data = await response.json();
       setStudents(data);
     } catch (error) {
@@ -56,10 +68,24 @@ const SoftwareReport = (props: any) => {
     }
   };
 
-  useEffect(() => {
-    fetchStudents();
-    fetchMyStudent();
-  }, []);
+  const storeStudent = async () => { 
+    try {
+      const response = await fetch("http://localhost:3002/studentsName", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({Myname: storeStudentsName}),
+      });
+      if (response.ok) {
+        console.log("Student stored successfully!");
+      } else {
+        console.error("Failed to store student");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 
   const handleOptionSelect = (optionIndex: number) => {
@@ -135,10 +161,7 @@ const SoftwareReport = (props: any) => {
 
   const submitQuiz = () => {
     console.log("Quiz submitted!");
-    navigate("/Forms");
-
-    // Update local storage with final quiz data
-    // localStorage.setItem("quizData", JSON.stringify(quizData));
+    navigate("/report");
   };
 
   const handleEditClick = (questionIndex: number) => {
@@ -167,56 +190,19 @@ const SoftwareReport = (props: any) => {
   };
 
   const currentQuizQuestion = quizData[currentQuestion];
-  const [groupData, setGroupData] = useState<Group[]>([]);
 
-  useEffect(() => {
-    fetchGroups();
-  }, []);
 
   const fetchGroups = async () => {
     try {
       const response = await fetch('http://localhost:3002/createGroup');
       if (response.ok) {
         const data = await response.json();
-        setGroupData(data);
       } else {
         console.error('Failed to fetch groups');
       }
     } catch (error) {
       console.error('Failed to fetch groups:', error);
     }
-  };
-
-  const fetchMyStudent = async () => {
-    try {
-      const response = await fetch('http://localhost:3002/students');
-      const retrievedStudents = await response.json();
-      setStudents(retrievedStudents);
-    } catch (error) {
-      console.error('Error retrieving students:', error);
-    }
-
-  };
-
-  const findStudent1 = (studentId: string) => {
-    const student = students.find((student) => student._id === studentId);
-    if (student) {
-      return student.name;
-    }
-    return '';
-  };
-
-  const findStudent = () => {
-    const group = groupData.find((group) => group._id === props.selectedGroup?._id);
-    console.log("props.selectedGroup",props.selectedGroup);
-    console.log("groupData",groupData);
-    
-    if (group) {
-      console.log("student",group);
-      
-      return group.students.map((student: any) => findStudent1(student)).join(", ");
-    }
-    return '';
   };
 
 
@@ -285,24 +271,26 @@ const SoftwareReport = (props: any) => {
                     <EditOutlined size={30} onClick={() => handleEditClick(currentQuestion)} />
                     <span className="question-text">{currentQuizQuestion.question}</span>
                     {currentQuizQuestion.type == 'Personal Question' ? <div className="small">"Personal"</div> : null}
-                    {/* ****************************************** */}
-                    {
-                      currentQuizQuestion.type == 'Personal Question' ?
-                        <div className="small-text">
-                          <div className="groups">
-                            {currentQuizQuestion.type === 'Personal Question' ? (
-                              <h1>{findStudent()}</h1>
-                            ) : null}
-                          </div>
-                        </div> : ""
+                    {currentQuizQuestion.type == 'Personal Question' ?
+                      <div className="small-text">
+                        <div className="groups">
+                          {currentQuizQuestion.type === 'Personal Question' ? (
+                            <h1>{storeStudentsName.map((s,ind) =>
+                               <div key={ind}>
+                                {s}
+                                <input className="student-input"/>
+                               </div>)}</h1>
+                          ) : null}
+                        </div>
+                      </div> : ""
                     }
-
                   </div>
                   <span className="question-text">{currentQuizQuestion.weight} %</span>
                 </h3>
 
                 <ul>
-                  {currentQuizQuestion.options.map((option, index) => (
+                  {currentQuizQuestion.type === 'Personal Question' ? '' :
+                  currentQuizQuestion.options.map((option, index) => (
                     <li
                       key={index + 1}
                       className={selectedOption === index ? "selected-option" : ""}
