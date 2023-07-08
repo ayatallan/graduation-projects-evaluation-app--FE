@@ -36,7 +36,6 @@ const CreateStudentPage: React.FC = () => {
       const updatedStudents = [...students, createdStudent];
       setStudents(updatedStudents);
       setShowForm(false);
-      saveToLocalStorage(updatedStudents);
     } catch (error) {
       console.error('Error creating student:', error);
     }
@@ -44,10 +43,6 @@ const CreateStudentPage: React.FC = () => {
 
   const toggleForm = () => {
     setShowForm(!showForm);
-  };
-
-  const saveToLocalStorage = (data: Student[]) => {
-    localStorage.setItem('students', JSON.stringify(data));
   };
 
   return (

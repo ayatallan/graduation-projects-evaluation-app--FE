@@ -5,11 +5,17 @@
 }
 
 .groups {
-    margin-top: 200px;
      font-size: larger;
      font-weight: bolder;
      display: flex;
+     height: 100vh;
      justify-content: center;
      align-items: center;
      flex-direction: column;
+ }
+ .g{
+    text-align: center;
+    color: #2D6A4F;
+   text-shadow: 1px 1px 1px #081C15;
+
  }

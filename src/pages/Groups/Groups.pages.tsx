@@ -50,13 +50,13 @@ const GroupsPage = (props:any) => {
   
   return (
     <>
-      <p className="path">Groups Page</p>
       <div className="groups">
+      <h1 className="g">All Groups </h1>
         {groupData?.map((group: Group, index: number) => (
           <Link to={`/Questions?type=${group.type}&group=${group.groupName}&student=${group.students.map((s: any,ind : any) => {
             return findStudent(s);
           })}`} key={index} >
-            <button onClick={() => click(group)}>{group.groupName}</button>
+            <button onClick={() => click(group)}>{group.groupName}<br/>{group.type}</button>
           </Link>
         ))}
       </div>

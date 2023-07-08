@@ -44,7 +44,6 @@ const CreateInstructorPage: React.FC = () => {
         const updatedInstructors = [...instructors, createdInstructor];
         setInstructors(updatedInstructors);
         setShowForm(false);
-        saveToLocalStorage(updatedInstructors);
         setShowBG(!showBG);
 
       } else {
@@ -59,10 +58,6 @@ const CreateInstructorPage: React.FC = () => {
     setShowForm(!showForm);
     setShowBG(!showBG);
 
-  };
-
-  const saveToLocalStorage = (data: Instructor[]) => {
-    localStorage.setItem('instructors', JSON.stringify(data));
   };
 
   return (

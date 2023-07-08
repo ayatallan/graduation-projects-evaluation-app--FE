@@ -18,7 +18,6 @@ const SoftwareReport = (props: any) => {
   const [newQuestionText, setNewQuestionText] = useState("");
   const [groupTilte, setGroupTilte] = useState<string | null>("");
   const [newOptions, setNewOptions] = useState<{ option: string; weight: number }[]>([]);
-  const [newWeight, setNewWeight] = useState(0);
   const [students, setStudents] = useState<Student[]>([]);
   const [storeStudentsName, setStoreStudentsName] = useState<String[]>([]);
   
@@ -177,7 +176,6 @@ const SoftwareReport = (props: any) => {
     questionIndex: number,
     newQuestionText: string,
     newOptions: { option: string; weight: number }[],
-    newWeight: number
   ) => {
     const questionId = quizData[questionIndex]._id;
 
@@ -190,7 +188,6 @@ const SoftwareReport = (props: any) => {
         body: JSON.stringify({
           question: newQuestionText,
           options: newOptions,
-          weight: newWeight,
         }),
       });
 
@@ -201,7 +198,6 @@ const SoftwareReport = (props: any) => {
             ...updatedData[questionIndex],
             question: newQuestionText,
             options: newOptions,
-            weight: newWeight,
           };
 
           return updatedData;
@@ -224,24 +220,20 @@ const SoftwareReport = (props: any) => {
     setEditingQuestionIndex(questionIndex);
     setNewQuestionText(quizData[questionIndex].question);
     setNewOptions([...quizData[questionIndex].options]);
-    setNewWeight(quizData[questionIndex].weight);
-
   };
 
   const handleCancelEdit = () => {
     setEditingQuestionIndex(null);
     setNewQuestionText("");
     setNewOptions([]);
-    setNewWeight(0);
   };
 
   const handleSaveEdit = () => {
     if (editingQuestionIndex !== null) {
-      updateQuestion(editingQuestionIndex, newQuestionText, newOptions, newWeight);
+      updateQuestion(editingQuestionIndex, newQuestionText, newOptions);
       setEditingQuestionIndex(null);
       setNewQuestionText("");
       setNewOptions([]);
-      setNewWeight(0);
     }
   };
 
@@ -285,15 +277,6 @@ const SoftwareReport = (props: any) => {
                   value={newQuestionText}
                   onChange={(e) => setNewQuestionText(e.target.value)}
                 />
-
-                <label htmlFor="weight">Weight:</label>
-                <input
-                  type="number"
-                  id="weight"
-                  value={newWeight}
-                  onChange={(e) => setNewWeight(Number(e.target.value))}
-                />
-
                 <label htmlFor="options">Options:</label>
                 <ul>
                   {newOptions.map((option, index) => (

@@ -10,13 +10,12 @@ export interface QuizQuestion {
   id: Number,
   question: string;
   options:{ option: string; weight: number }[];
-  weight: number;
   Class: string;
   type: string;
   answer: number;
 }
 export interface FormProps {
-  onSubmit: (question: string, options: { option: string; weight: number }[], type: string, Class: string, weight: number) => void;
+  onSubmit: (question: string, options: { option: string; weight: number }[], type: string, Class: string) => void;
 }
 export interface Instructor {
   id: number;
@@ -66,4 +65,9 @@ export interface GroupInfo {
   students: StudentReportInfo[];
   instructor: string; 
   type: string;
+}
+export interface User {
+  _id: string;
+  name:string;
+  email:string
 }

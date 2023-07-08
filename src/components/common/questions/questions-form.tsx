@@ -38,7 +38,7 @@ const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(question, options, type, Class, weight);
+    onSubmit(question, options, type, Class);
 
     // Clear the input fields
     setType('');
