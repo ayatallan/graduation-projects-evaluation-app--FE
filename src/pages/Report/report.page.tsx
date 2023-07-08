@@ -71,7 +71,8 @@ const ReportPage = () => {
     csvContent += 'Group,Instructor,Student,Result\n';
     studentData.forEach((studentRow) => {
       const studentName = studentRow[0];
-      const row = `"${groupName}","${instructorName}","${studentName}",\n`;
+      const randomResult = Math.floor(Math.random() * 26) + 70; // Generate a random number between 70 and 95
+      const row = `"${groupName}","${instructorName}","${studentName}",${randomResult}\n`;
       csvContent += row;
     });
 
@@ -93,7 +94,8 @@ const ReportPage = () => {
       const instructorName = findInstructor(group.instructor);
       group.students.forEach((studentId: any) => {
         const studentName = findStudent(studentId);
-        const row = `"${group.groupName}","${instructorName}","${studentName}",\n`;
+        const randomResult = Math.floor(Math.random() * 26) + 70; // Generate a random number between 70 and 95
+        const row = `"${group.groupName}","${instructorName}","${studentName}",${randomResult}\n`;
         csvContent += row;
       });
     });
@@ -110,18 +112,13 @@ const ReportPage = () => {
 
   return (
     <div className="wrapper">
-
       <div className="btnn">
         <button onClick={saveAllTablesAsCSV} className='quiz-btn'>Save All </button>
-
       </div>
-
-
 
       {groups.map((group, index) => (
         <div className="student-table-container" key={index}>
           <hr className='hr' />
-
           <p className='g-name'>Group :  {group.groupName}</p>
           <p className='i-name'><b className='g-name'>  Instructor :</b> {findInstructor(group.instructor)}</p>
           <table className="student-table">
@@ -137,7 +134,7 @@ const ReportPage = () => {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{findStudent(student)}</td>
-                  <td></td>
+                  <td>{Math.floor(Math.random() * 26) + 70}</td> {/* Render a random result between 70 and 95 */}
                 </tr>
               ))}
             </tbody>
@@ -150,8 +147,6 @@ const ReportPage = () => {
               Save
             </button>
           </div>
-
-
         </div>
       ))}
     </div>

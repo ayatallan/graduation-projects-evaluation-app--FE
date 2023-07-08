@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './group.css';
 import { Link } from 'react-router-dom';
-import Buttons from '../../components/common/buttons/buttons';
-import { Group } from '../../interface';
+import { Group, Student } from '../../interface';
 
-const GroupsPage = () => {
+const GroupsPage = (props:any) => {
   const [groupData, setGroupData] = useState<Group[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
 
   useEffect(() => {
     fetchGroups();
+    fetchStudents();
   }, []);
-
+  
   const fetchGroups = async () => {
     try {
       const response = await fetch('http://localhost:3002/createGroup');
@@ -25,15 +26,37 @@ const GroupsPage = () => {
     }
   };
 
+  const click = (group : any) => {
+    props.setSelectedGroup(group)
+  }
+
+  const fetchStudents = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/students');
+      const retrievedStudents = await response.json();
+      setStudents(retrievedStudents);
+    } catch (error) {
+      console.error('Error retrieving students:', error);
+    }
+
+  };
+  const findStudent = (studentId: string) => {
+    const student = students.find((student) => student._id === studentId);
+    if (student) {
+      return student.name;
+    }
+    return '';
+  };
+  
   return (
     <>
-
       <div className="groups">
-        <h1 className="g">All Groups </h1>
+      <h1 className="g">All Groups </h1>
         {groupData?.map((group: Group, index: number) => (
-          <Link to={`/Questions?type=${group.type}`} key={index}>
-            <Buttons text={group.groupName} text2={group.type}  />
-
+          <Link to={`/Questions?type=${group.type}&group=${group.groupName}&student=${group.students.map((s: any,ind : any) => {
+            return findStudent(s);
+          })}`} key={index} >
+            <button onClick={() => click(group)}>{group.groupName}<br/>{group.type}</button>
           </Link>
         ))}
       </div>

@@ -2,8 +2,9 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import './createGroup.css';
 import { Group, Instructor, Name, Student, StudentName } from '../../interface';
 import { Card } from 'react-bootstrap';
-import Select from '../../components/common/select/select.component';
 import CheckBox from '../../components/common/toggle-bullets/check-box.component';
+import Select from '../../components/common/select/select.component';
+
 
 const CreateGroup = () => {
   const [showForm, setShowForm] = useState(false);
@@ -79,6 +80,7 @@ const CreateGroup = () => {
     }
     return '';
   };
+
   const findInstructor = (instructorId: any) => {
     const instructor = instructors.find((instructors) => instructors._id === instructorId);
     if (instructor) {
@@ -118,7 +120,7 @@ const CreateGroup = () => {
           setSubmit(true);
           setShowForm(false);
           setShowBG(false)
-          
+
         } else {
           const errorData = await response.json();
           setError(errorData.error || 'Failed to create group');
@@ -203,7 +205,7 @@ const CreateGroup = () => {
               className="my-input"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
             >
-            {instructors?.map((instructor, index) => (
+              {instructors?.map((instructor, index) => (
                 <option key={index} value={index}>
                   {instructor.name}
                 </option>
@@ -219,7 +221,7 @@ const CreateGroup = () => {
                   value={index}
                   label={student.name}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event,student._id);
+                    handleChange(event, student._id);
 
                   }}
                 />

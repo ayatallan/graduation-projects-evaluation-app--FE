@@ -9,37 +9,35 @@ import './App.css';
 import CreateInstructorPage from './pages/add-instructor/instructor.page';
 import CreateStudentPage from './pages/add-student/student.page';
 import CreateGroup from './pages/create-group/createGroup';
-import { Question } from './interface';
+import { Group, Question } from './interface';
 import SoftwareReport from './components/common/questions/question';
 import QuestionsForm from './components/common/questions/questions-form';
 
 function App() {
-  const [questions, setQuestions] = useState<Question[]>(() => {
-    const savedQuestions = localStorage.getItem('questions');
-    return savedQuestions ? JSON.parse(savedQuestions) : [];
-  });
-  const [users, setUser] = useState({});
-
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<Object>({});
+  const [inputValues, setInputValues] = useState<string[]>([]);
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-  // const navigate=useNavigate();
 
   const handleSubmit = async (
     question: string,
-    options: string[],
+    options: { option: string; weight: number; }[],
     type: string,
     Class: string,
-    weight: number
   ) => {
+    const newOptions = options?.map((option, index) => ({
+      option: option.option,
+      weight: index + 1, // Set the weight equal to the index + 1
+    }));
     const newQuestion: Question = {
       id: Date.now(),
       question: question,
-      options: options,
+      options: newOptions,
       type: type,
       Class: Class,
-      weight: weight,
     };
 
     try {
@@ -58,25 +56,25 @@ function App() {
       const data = await response.json();
       setQuestions((prevQuestions) => [...prevQuestions, data]);
     } catch (error) {
-      // navigate('./Questions')
       console.error(error);
     }
   };
 
-
-  console.log("my user", users);
-
   return (
     <div className="App">
       <BrowserRouter>
-        <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} 
-        Musers={users} setUser={setUser}
-        handleToggleSidebar={handleToggleSidebar} />
+        <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
         <Routes>
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
-          <Route path="/" element={<SignInPage  users={users} setUser={setUser}/>} />
-          <Route path="/Groups" element={<GroupsPage />} />
-          <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" />} />
+          <Route path="/" element={<SignInPage />} />
+          <Route path="/Groups" element={<GroupsPage setSelectedGroup={setSelectedGroup} selectedGroup={selectedGroup} />} />
+          <Route path="/Questions" element={<SoftwareReport
+            quizData={questions}
+            path="/Questions"
+            selectedGroup={selectedGroup}
+            inputValues={inputValues}
+            setInputValues={setInputValues}
+          />} />
           <Route path="/Report" element={<ReportPage />} />
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />

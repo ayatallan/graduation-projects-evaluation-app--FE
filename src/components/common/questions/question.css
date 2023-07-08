@@ -7,7 +7,11 @@
   margin: 0 auto;
   padding: 20px;
 }
-
+.student-input {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+}
 .quiz-container h2 {
   text-align: center;
 }
@@ -175,12 +179,11 @@ a {
 }
 
 .form-container {
-  background-color: hsl(141, 45%, 81%);
-  border: 1px solid #95D5B2;
+  background-color: #f5ecec;
+  border: 1px solid #ccc;
   border-radius: 4px;
   padding: 20px;
-  box-shadow: 6px 5px 9px 0px #a9b1aa;
-
+  box-shadow: 6px 5px 9px 0px #938486;
 }
 .small{
   color: #337d5c;
