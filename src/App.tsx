@@ -21,6 +21,7 @@ function App() {
 
   const [showSidebar, setShowSidebar] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState<Object>({});
+  const [inputValues, setInputValues] = useState<string[]>([]);
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -76,8 +77,14 @@ function App() {
         <Routes>
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
           <Route path="/" element={<SignInPage />} />
-          <Route path="/Groups" element={<GroupsPage setSelectedGroup={setSelectedGroup} selectedGroup={selectedGroup}/>} />
-          <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions"  selectedGroup={selectedGroup}/>} />
+          <Route path="/Groups" element={<GroupsPage setSelectedGroup={setSelectedGroup} selectedGroup={selectedGroup} />} />
+          <Route path="/Questions" element={<SoftwareReport
+            quizData={questions}
+            path="/Questions"
+            selectedGroup={selectedGroup} 
+            inputValues={inputValues}
+            setInputValues={setInputValues}
+            />} />
           <Route path="/Report" element={<ReportPage />} />
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />

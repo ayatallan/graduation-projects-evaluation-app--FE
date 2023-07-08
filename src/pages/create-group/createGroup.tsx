@@ -2,8 +2,9 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import './createGroup.css';
 import { Group, Instructor, Name, Student, StudentName } from '../../interface';
 import { Card } from 'react-bootstrap';
-import Select from '../../components/select/select.component';
+
 import CheckBox from '../../components/common/toggle-bullets/check-box.component';
+import Select from '../../components/select/select.component';
 
 const CreateGroup = () => {
   const [showForm, setShowForm] = useState(false);
@@ -12,9 +13,6 @@ const CreateGroup = () => {
   const [index, setIndex] = useState(0);
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
   const [groupName, setGroupName] = useState('');
-  const dataJson: any = localStorage.getItem('instructors');
-  const data: Name[] = JSON.parse(dataJson);
-
   const [indexType, setIndexType] = useState(-1);
   const [groups, setGroups] = useState<Group[]>([]);
   const [instructors, setInstructors] = useState<Instructor[]>([]);
@@ -206,10 +204,9 @@ const CreateGroup = () => {
               className="my-input"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => setIndex(Number(e.target.value))}
             >
-              {data?.map((data: Name, index: number) => (
-
-                <option key={index} value={index} >
-                  {data.name}
+            {instructors?.map((instructor, index) => (
+                <option key={index} value={index}>
+                  {instructor.name}
                 </option>
               ))}
             </Select>

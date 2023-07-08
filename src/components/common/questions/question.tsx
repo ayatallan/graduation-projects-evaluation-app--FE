@@ -11,6 +11,7 @@ const SoftwareReport = (props: any) => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [selectedQ, setSelectedQ] = useState<number>(0);
   const [score, setScore] = useState(0);
   const [quizData, setQuizData] = useState<QuizQuestion[]>(props.quizData);
   const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
@@ -19,8 +20,8 @@ const SoftwareReport = (props: any) => {
   const [newWeight, setNewWeight] = useState(0);
   const [students, setStudents] = useState<Student[]>([]);
   const [storeStudentsName, setStoreStudentsName] = useState<String[]>([]);
+  
   const location = useLocation();
-  console.log(quizData);
 
 
   useEffect(() => {
@@ -91,7 +92,10 @@ const SoftwareReport = (props: any) => {
 
 
   const handleOptionSelect = (optionIndex: number) => {
+    console.log(optionIndex);
+    
     setSelectedOption(optionIndex);
+    setSelectedQ(optionIndex);
   };
 
   const handlePrevious = () => {
@@ -108,11 +112,57 @@ const SoftwareReport = (props: any) => {
       }
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
       setSelectedOption(null);
+      setSelectedQ(0);
+      props.setInputValues([]);
     } else {
       submitQuiz();
     }
   };
 
+  
+  
+  const handleInputChange = async (index: number, value: string) => {
+    console.log("props.inputValues", props.inputValues);
+    
+    const updatedInputValues = [...props.inputValues];
+    updatedInputValues[index] = value;
+    console.log("updatedInputValues", updatedInputValues);
+    props.setInputValues(updatedInputValues);
+    
+    const studentName = storeStudentsName[index];
+    const groupId = props.selectedGroup._id; 
+    console.log("inputValues" , props.inputValues);
+  
+    // Calculate the sum of all values
+    const sum = updatedInputValues.reduce((acc, val) => acc + Number(val), 0);
+    
+    try {
+      const response = await fetch("http://localhost:3002/studentData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          group: groupId,
+          studentName: studentName,
+          value: sum.toString(), // Store the sum of all values
+        }),
+      });
+      
+      if (response.ok) {
+        console.log(`Stored student data for ${studentName}`);
+      } else {
+        console.error(`Failed to store student data for ${studentName}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    
+    handleOptionSelect(index + 1);
+  };
+  
+  
+  
   const checkAnswer = () => {
     if (selectedOption === quizData[currentQuestion].answer) {
       setScore((prevScore) => prevScore + 1);
@@ -286,7 +336,15 @@ const SoftwareReport = (props: any) => {
                             {storeStudentsName.map((s, ind) => (
                               <div key={ind}>
                                 {s}
-                                <input className="student-input" />
+                                <input
+                                 className="student-input" 
+                                 value={props.inputValues[ind] || ''}
+                                 onChange={(e) =>{
+                                   handleOptionSelect(selectedQ+1)
+                                  //  props.setInputValues((p : any) => [...p ,e.target.value ])
+                                   handleInputChange(ind, e.target.value)
+                                }}
+                                 />
                               </div>
                             ))}
                           </h1>
@@ -307,7 +365,8 @@ const SoftwareReport = (props: any) => {
                             checked={selectedOption === index}
                             onChange={() => handleOptionSelect(index)}
                           />
-                          Option: {op.option}
+                          
+                           {op.option}
                         </label>
                       </li>
                     ))
