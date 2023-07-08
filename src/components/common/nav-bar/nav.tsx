@@ -14,8 +14,7 @@ const MyNavbar= (props : any) => {
         ☰
       </Navbar.Brand>
       <Navbar.Collapse id="basic-navbar-nav">
-        {/* Render the sidebar if showSidebar is true */}
-     
+{/* <span>{props.Musers.Name}</span> */}
       </Navbar.Collapse>
     </Navbar>  
     <div className="Side">

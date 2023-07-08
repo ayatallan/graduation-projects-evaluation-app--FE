@@ -18,6 +18,7 @@ function App() {
     const savedQuestions = localStorage.getItem('questions');
     return savedQuestions ? JSON.parse(savedQuestions) : [];
   });
+  const [users, setUser] = useState({});
 
   const [showSidebar, setShowSidebar] = useState(false);
   const handleToggleSidebar = () => {
@@ -63,14 +64,17 @@ function App() {
   };
 
 
+  console.log("my user", users);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
+        <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} 
+        Musers={users} setUser={setUser}
+        handleToggleSidebar={handleToggleSidebar} />
         <Routes>
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
-          <Route path="/" element={<SignInPage />} />
+          <Route path="/" element={<SignInPage  users={users} setUser={setUser}/>} />
           <Route path="/Groups" element={<GroupsPage />} />
           <Route path="/Questions" element={<SoftwareReport quizData={questions} path="/Questions" />} />
           <Route path="/Report" element={<ReportPage />} />
