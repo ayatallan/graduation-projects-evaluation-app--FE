@@ -158,7 +158,7 @@ const SoftwareReport = (props: any) => {
       console.error(error);
     }
     
-    handleOptionSelect(index + 1);
+    handleOptionSelect(selectedQ+1)
   };
   
   
@@ -339,11 +339,9 @@ const SoftwareReport = (props: any) => {
                                 <input
                                  className="student-input" 
                                  value={props.inputValues[ind] || ''}
-                                 onChange={(e) =>{
-                                   handleOptionSelect(selectedQ+1)
-                                  //  props.setInputValues((p : any) => [...p ,e.target.value ])
+                                 onChange={(e) =>
                                    handleInputChange(ind, e.target.value)
-                                }}
+                                }
                                  />
                               </div>
                             ))}
