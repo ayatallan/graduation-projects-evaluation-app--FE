@@ -17,6 +17,7 @@ const SoftwareReport = (props: any) => {
   const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
   const [newQuestionText, setNewQuestionText] = useState("");
   const [groupTilte, setGroupTilte] = useState<string | null>("");
+  const [groupType, setGroupType] = useState<string | null>("");
   const [newOptions, setNewOptions] = useState<{ option: string; weight: number }[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [storeStudentsName, setStoreStudentsName] = useState<String[]>([]);
@@ -38,10 +39,11 @@ const SoftwareReport = (props: any) => {
     const searchParams = new URLSearchParams(location.search);
     const element = searchParams.get("student");
     const title = searchParams.get("group");
+    const typeClass = searchParams.get("type");
     const studentArray = element ? element.split(',') : [];
     console.log("student", studentArray);
     setGroupTilte(title);
-    
+    setGroupType(typeClass);
     setStoreStudentsName(studentArray);
   }, [location.search]);
 
@@ -257,7 +259,7 @@ const SoftwareReport = (props: any) => {
   return (
     <>
       <p className="path">{props.path}</p>
-      <h2 className="project-name">{groupTilte}</h2>
+      <h2 className="project-name">{groupTilte} <br/> <span className="group-type">"{groupType}"</span></h2>
       <div className="link">
         <div className="btnn">
           <Link to={'/add-questions'} className="quiz-btn " >
@@ -316,13 +318,14 @@ const SoftwareReport = (props: any) => {
                 <ul>
                   {currentQuizQuestion.type === 'Personal Question' ? (
                     <div className="small-text">
-                      <div className="groups">
+                      <div className="groups-qustion">
                         {currentQuizQuestion.type === 'Personal Question' ? (
-                          <h1>
+                          <>
                             {storeStudentsName.map((s, ind) => (
-                              <div key={ind}>
-                                {s}
+                              <div key={ind} className="studet-group-name">
+                                <span className="student-name-group">{s} : </span>
                                 <input
+                                 placeholder="Grade"
                                  className="student-input" 
                                  value={props.inputValues[ind] || ''}
                                  onChange={(e) =>
@@ -331,7 +334,7 @@ const SoftwareReport = (props: any) => {
                                  />
                               </div>
                             ))}
-                          </h1>
+                          </>
                         ) : null}
                       </div>
                     </div>
