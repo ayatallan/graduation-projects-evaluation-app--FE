@@ -10,14 +10,12 @@ const MyNavbar = (props: any) => {
   return (
     <div>
       <Navbar className="nav-bar">
-        <Navbar.Brand onClick={props.handleToggleSidebar}>
-         <span className="paddingLeft">☰</span> 
-          <Link to="/groups" className="nav-button">Groups</Link>
-          <Link to="/report" className="nav-button">Report</Link>
-        </Navbar.Brand>
-        <Navbar.Collapse id="basic-navbar-nav">
-          {/* <span>{props.Musers.Name}</span> */}
-        </Navbar.Collapse>
+         <span className="paddingLeft"  onClick={props.handleToggleSidebar}>☰</span> 
+       {((props.path !== '/Home') || (props.path !== '/') )&& 
+          <div className="navigate-btn">
+            <Link to="/groups" className="nav-button">Groups</Link>
+            <Link to="/report" className="nav-button">Report</Link>
+          </div>}
       </Navbar>
       <div className="Side">
         {props.showSidebar && <SideBar showSidebar={props.showSidebar} setShowSidebar={props.setShowSidebar} handleToggleSidebar={props.handleToggleSidebar} />}
