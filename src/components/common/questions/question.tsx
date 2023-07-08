@@ -8,7 +8,7 @@ import { QuizQuestion, Student } from "../../../interface";
 
 const SoftwareReport = (props: any) => {
   const navigate = useNavigate();
-
+   
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [selectedQ, setSelectedQ] = useState<number>(0);
@@ -16,6 +16,7 @@ const SoftwareReport = (props: any) => {
   const [quizData, setQuizData] = useState<QuizQuestion[]>(props.quizData);
   const [editingQuestionIndex, setEditingQuestionIndex] = useState<number | null>(null);
   const [newQuestionText, setNewQuestionText] = useState("");
+  const [groupTilte, setGroupTilte] = useState<string | null>("");
   const [newOptions, setNewOptions] = useState<{ option: string; weight: number }[]>([]);
   const [newWeight, setNewWeight] = useState(0);
   const [students, setStudents] = useState<Student[]>([]);
@@ -37,8 +38,11 @@ const SoftwareReport = (props: any) => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const element = searchParams.get("student");
+    const title = searchParams.get("group");
     const studentArray = element ? element.split(',') : [];
     console.log("student", studentArray);
+    setGroupTilte(title);
+    
     setStoreStudentsName(studentArray);
   }, [location.search]);
 
@@ -261,7 +265,7 @@ const SoftwareReport = (props: any) => {
   return (
     <>
       <p className="path">{props.path}</p>
-      <h2 className="project-name">Project Name</h2>
+      <h2 className="project-name">{groupTilte}</h2>
       <div className="link">
         <div className="btnn">
           <Link to={'/add-questions'} className="quiz-btn " >
@@ -324,7 +328,6 @@ const SoftwareReport = (props: any) => {
                     <span className="question-text">{currentQuizQuestion.question}</span>
                     {currentQuizQuestion.type === 'Personal Question' ? <div className="small">"Personal"</div> : null}
                   </div>
-                  <span className="question-text">{currentQuizQuestion.weight} %</span>
                 </h3>
 
                 <ul>

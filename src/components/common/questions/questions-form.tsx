@@ -86,16 +86,6 @@ const QuestionsForm: React.FC<FormProps> = ({ onSubmit }) => {
 
           <div className="sub-box">
             <label className="form-label">
-              Weight:
-              <input
-                className="form-input"
-                required
-                type="number"
-                value={weight}
-                onChange={handleWeightChange}
-              />
-            </label>
-            <label className="form-label">
               Class:
               <input
                 className="form-input"
