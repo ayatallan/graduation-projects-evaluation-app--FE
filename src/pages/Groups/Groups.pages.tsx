@@ -40,6 +40,7 @@ const GroupsPage = (props:any) => {
     }
 
   };
+
   const findStudent = (studentId: string) => {
     const student = students.find((student) => student._id === studentId);
     if (student) {
@@ -56,7 +57,11 @@ const GroupsPage = (props:any) => {
           <Link to={`/Questions?type=${group.type}&group=${group.groupName}&student=${group.students.map((s: any,ind : any) => {
             return findStudent(s);
           })}`} key={index} >
-            <button onClick={() => click(group)}>{group.groupName}<br/>{group.type}</button>
+            <div className="button-group">
+              <button  onClick={() => click(group)}>
+                {group.groupName} <span>({group.type})</span>
+              </button>
+            </div>
           </Link>
         ))}
       </div>
