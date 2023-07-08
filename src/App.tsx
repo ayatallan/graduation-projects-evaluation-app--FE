@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate, RouteProps } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MyNavbar from './components/common/nav-bar/nav';
 import SignInPage from './pages/sign-in/sign-in.page';
@@ -12,6 +12,7 @@ import CreateGroup from './pages/create-group/createGroup';
 import { Group, Question } from './interface';
 import SoftwareReport from './components/common/questions/question';
 import QuestionsForm from './components/common/questions/questions-form';
+import HomePage from './pages/home/home';
 
 function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -60,28 +61,30 @@ function App() {
     }
   };
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
-        <Routes>
-          <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
-          <Route path="/" element={<SignInPage />} />
-          <Route path="/Groups" element={<GroupsPage setSelectedGroup={setSelectedGroup} selectedGroup={selectedGroup} />} />
-          <Route path="/Questions" element={<SoftwareReport
-            quizData={questions}
-            path="/Questions"
-            selectedGroup={selectedGroup}
-            inputValues={inputValues}
-            setInputValues={setInputValues}
-          />} />
-          <Route path="/Report" element={<ReportPage />} />
-          <Route path="/add-instructor" element={<CreateInstructorPage />} />
-          <Route path="/add-student" element={<CreateStudentPage />} />
-          <Route path="/createGroup" element={<CreateGroup />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
+          <Routes>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
+            <Route path="/" element={<SignInPage />} />
+            <Route path="/Groups" element={<GroupsPage setSelectedGroup={setSelectedGroup} selectedGroup={selectedGroup} />} />
+            <Route path="/Questions" element={<SoftwareReport
+              quizData={questions}
+              path="/Questions"
+              selectedGroup={selectedGroup}
+              inputValues={inputValues}
+              setInputValues={setInputValues}
+            />} />
+            <Route path="/Report" element={<ReportPage />} />
+            <Route path="/add-instructor" element={<CreateInstructorPage />} />
+            <Route path="/add-student" element={<CreateStudentPage />} />
+            <Route path="/createGroup" element={<CreateGroup />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
   );
 }
 

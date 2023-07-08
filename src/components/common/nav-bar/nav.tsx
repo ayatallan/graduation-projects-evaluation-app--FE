@@ -4,28 +4,29 @@ import './nav.css';
 import { useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import SideBar from "../admin-dashboard-sidebar/sideBar";
+import { Link } from 'react-router-dom';
 
-const MyNavbar= (props : any) => {
-
+const MyNavbar = (props: any) => {
   return (
     <div>
-    <Navbar className="nav-bar">
-      <Navbar.Brand  onClick={props.handleToggleSidebar}>
-        ☰
-      </Navbar.Brand>
-      <Navbar.Collapse id="basic-navbar-nav">
-{/* <span>{props.Musers.Name}</span> */}
-      </Navbar.Collapse>
-    </Navbar>  
-    <div className="Side">
-    {props.showSidebar && <SideBar showSidebar={props.showSidebar} setShowSidebar={props.setShowSidebar} handleToggleSidebar={props.handleToggleSidebar}  />}
-
-    </div>
-
+      <Navbar className="nav-bar">
+        <Navbar.Brand onClick={props.handleToggleSidebar}>
+         <span className="paddingLeft">☰</span> 
+          <Link to="/groups" className="nav-button">Groups</Link>
+          <Link to="/report" className="nav-button">Report</Link>
+        </Navbar.Brand>
+        <Navbar.Collapse id="basic-navbar-nav">
+          {/* <span>{props.Musers.Name}</span> */}
+        </Navbar.Collapse>
+      </Navbar>
+      <div className="Side">
+        {props.showSidebar && <SideBar showSidebar={props.showSidebar} setShowSidebar={props.setShowSidebar} handleToggleSidebar={props.handleToggleSidebar} />}
+        <nav>
+          {/* Additional navigation links */}
+        </nav>
+      </div>
     </div>
   );
 };
 
-
 export default MyNavbar;
-                    
