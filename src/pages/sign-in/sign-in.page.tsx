@@ -1,11 +1,10 @@
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import './sign-in.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import './sign-in.css';
 
 const SignInPage = (props: any) => {
   const [res, setRes] = useState('');
-
   const navigate = useNavigate();
 
   const responseMessage = async (response: any) => {
@@ -27,7 +26,7 @@ const SignInPage = (props: any) => {
       props.setUser(signedInUser);
 
       console.log('User fetched successfully');
-      navigate('/groups');
+      navigate('/Groups');
     } else {
       console.log('User not found');
     }
@@ -36,8 +35,6 @@ const SignInPage = (props: any) => {
     }
   };
 
-
-  
   const fetchUsers = async () => {
     try {
       const res = await fetch('http://localhost:3002/users');
@@ -48,25 +45,21 @@ const SignInPage = (props: any) => {
     }
   };
   
-
   useEffect(() => {
     if (res) {
       navigate('/groups');
     }
   }, [res, navigate]);
   
-
   const errorMessage = (error: any) => {
     console.log(error);
   };
-
 
   return (
     <div className="container1">
       <div className="ImageSignUpPage">
         <img src="logo.png" alt="ppu" />
         <h3 className="ppu">Palestine Polytechnic University</h3>
-        {/* <h3 className="ppu">{users.name}</h3> */}
         <span className="about">
           Graduation Projects Evaluation App is designed to provide an easy-to-use platform for evaluating graduation
           projects on specific criteria.
