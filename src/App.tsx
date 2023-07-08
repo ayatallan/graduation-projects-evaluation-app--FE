@@ -14,25 +14,19 @@ import SoftwareReport from './components/common/questions/question';
 import QuestionsForm from './components/common/questions/questions-form';
 
 function App() {
-  const [questions, setQuestions] = useState<Question[]>(() => {
-    const savedQuestions = localStorage.getItem('questions');
-    return savedQuestions ? JSON.parse(savedQuestions) : [];
-  });
-
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [showSidebar, setShowSidebar] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState<Object>({});
   const [inputValues, setInputValues] = useState<string[]>([]);
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-  // const navigate=useNavigate();
 
   const handleSubmit = async (
     question: string,
     options: { option: string; weight: number; }[],
     type: string,
     Class: string,
-    weight: number
   ) => {
     const newOptions = options?.map((option, index) => ({
       option: option.option,
@@ -44,7 +38,6 @@ function App() {
       options: newOptions,
       type: type,
       Class: Class,
-      weight: weight,
     };
 
     try {
@@ -63,12 +56,9 @@ function App() {
       const data = await response.json();
       setQuestions((prevQuestions) => [...prevQuestions, data]);
     } catch (error) {
-      // navigate('./Questions')
       console.error(error);
     }
   };
-
-
 
   return (
     <div className="App">
@@ -81,10 +71,10 @@ function App() {
           <Route path="/Questions" element={<SoftwareReport
             quizData={questions}
             path="/Questions"
-            selectedGroup={selectedGroup} 
+            selectedGroup={selectedGroup}
             inputValues={inputValues}
             setInputValues={setInputValues}
-            />} />
+          />} />
           <Route path="/Report" element={<ReportPage />} />
           <Route path="/add-instructor" element={<CreateInstructorPage />} />
           <Route path="/add-student" element={<CreateStudentPage />} />

@@ -4,7 +4,6 @@ export interface Question {
   options: { option: string; weight: number }[];
   type: string;
   Class: string;
-  weight: number
 }
 export interface QuizQuestion {
   _id: string,
