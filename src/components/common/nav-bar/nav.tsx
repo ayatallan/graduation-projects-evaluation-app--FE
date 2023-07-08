@@ -6,7 +6,6 @@ import { Navbar, Nav } from "react-bootstrap";
 import SideBar from "../admin-dashboard-sidebar/sideBar";
 
 const MyNavbar= (props : any) => {
-
   return (
     <div>
     <Navbar className="nav-bar">

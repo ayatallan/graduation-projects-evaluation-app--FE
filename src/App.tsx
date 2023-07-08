@@ -18,6 +18,8 @@ function App() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState<Object>({});
   const [inputValues, setInputValues] = useState<string[]>([]);
+  const [ok, setOk] = useState(false);
+
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -63,7 +65,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
+        <MyNavbar ok={ok} setOk={setOk} showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
         <Routes>
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
           <Route path="/" element={<SignInPage />} />

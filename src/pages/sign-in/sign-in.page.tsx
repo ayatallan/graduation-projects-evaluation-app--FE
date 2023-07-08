@@ -4,56 +4,49 @@ import { useNavigate } from 'react-router';
 import './sign-in.css';
 
 const SignInPage = (props: any) => {
-  const [res, setRes] = useState('');
+  const [email, setEmail] = useState('');
+  const [ok, setOk] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const responseMessage = async (response: any) => {
+  const handleEmailChange = (event: any) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: any) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
     try {
-      console.log(response);
+      const response = await fetch('http://localhost:3002/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      const user = {
-        id: response.id,
-        name: response.name,
-        email: response.email,
-      };
-
-      const res = await fetch(`http://localhost:3002/users`);
-    const data = await res.json();
-
-    if (data.length > 0) {
-      const signedInUser = data[0];
-      setRes(signedInUser);
-      props.setUser(signedInUser);
-
-      console.log('User fetched successfully');
-      navigate('/Groups');
-    } else {
-      console.log('User not found');
-    }
+      if (response.ok) {
+        const data = await response.json();
+        setError('');
+        navigate('/Groups');
+        setOk(true);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+        setOk(false);
+        alert("please make sure to enter valid email or password !")
+      }
     } catch (error) {
-      console.log(error);
+      console.error('Error:', error);
     }
   };
 
-  const fetchUsers = async () => {
-    try {
-      const res = await fetch('http://localhost:3002/users');
-      const data = await res.json();
-      props.setUser(data);
-    } catch (error) {
-      console.log('An error occurred while fetching users:', error);
-    }
-  };
-  
-  useEffect(() => {
-    if (res) {
-      navigate('/groups');
-    }
-  }, [res, navigate]);
-  
-  const errorMessage = (error: any) => {
-    console.log(error);
-  };
+
 
   return (
     <div className="container1">
@@ -65,12 +58,20 @@ const SignInPage = (props: any) => {
           projects on specific criteria.
         </span>
       </div>
-      <div className="click">Click Here To Login</div>
+      <div className="click">Enter Your Email & Password</div>
       <div className="SignUpButton">
         <div>
-          <GoogleOAuthProvider clientId={'17534540626-lvfagtcvme0aj8cpv83cbund5akg6cqs.apps.googleusercontent.com'}>
-            <GoogleLogin onSuccess={responseMessage} onError={() => errorMessage || undefined} />
-          </GoogleOAuthProvider>
+          <form className='form' onSubmit={handleSubmit}>
+            <div>
+              <label className='my-label'>Email:</label>
+              <input type="email" value={email} onChange={handleEmailChange} />
+            </div>
+            <div>
+              <label className='my-label'>Password:</label>
+              <input type="password" value={password} onChange={handlePasswordChange} />
+            </div>
+            <button className='sign-in ' type='submit'>submit</button>
+          </form>
         </div>
       </div>
     </div>
