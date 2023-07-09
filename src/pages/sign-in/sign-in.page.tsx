@@ -2,51 +2,52 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import './sign-in.css';
+import { User } from '../../interface';
 
 const SignInPage = (props: any) => {
   const [email, setEmail] = useState('');
-  const [ok, setOk] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleEmailChange = (event: any) => {
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/users');
+        if (response.ok) {
+          const users = await response.json();
+          const matchedUser = users.find((user:User) => user.email === email && user.password === password);
+          if (matchedUser) {
+            setError('');
+            navigate('/Groups');
+          } else {
+            setError('Invalid email or password');
+          }
+        } else {
+          setError('Error fetching users');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setError('Error fetching users');
+        alert("invalid email or password")
+      }
+    };
+
+    fetchUsers();
+  }, [email, password, navigate]);
+
+  const handleEmailChange = (event :any) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event: any) => {
+  const handlePasswordChange = (event:any) => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = (event:any) => {
     event.preventDefault();
-
-    try {
-      const response = await fetch('http://localhost:3002/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setError('');
-        navigate('/Groups');
-        setOk(true);
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message);
-        setOk(false);
-        alert("please make sure to enter valid email or password !")
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    // No need for the fetch request here since it's handled in the useEffect
   };
-
-
 
   return (
     <div className="container1">
