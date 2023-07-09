@@ -59,7 +59,7 @@ const SignInPage = (props: any) => {
           projects on specific criteria.
         </span>
       </div>
-      <div className="click">Enter Your Email & Password</div>
+      <div className="click">SIGN IN</div>
       <div className="SignUpButton">
         <div>
           <form className='form' onSubmit={handleSubmit}>

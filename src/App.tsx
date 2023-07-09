@@ -63,7 +63,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <MyNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
+        <MyNavbar  showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleToggleSidebar={handleToggleSidebar} />
         <Routes>
           <Route path="/add-questions" element={<QuestionsForm onSubmit={handleSubmit} />} />
           <Route path="/" element={<SignInPage />} />

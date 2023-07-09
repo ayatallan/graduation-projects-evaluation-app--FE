@@ -14,7 +14,7 @@ const MyNavbar = (props: any) => {
 
         <div className="Nav" onClick={props.handleToggleSidebar}>   ☰</div>
 
-        <div className="navigate-btn">
+     <div className="navigate-btn">
           <Link to="/groups" className="nav-button">Groups</Link>
           <Link to="/report" className="nav-button">Report</Link>
         </div>
