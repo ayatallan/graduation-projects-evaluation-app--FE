@@ -39,3 +39,21 @@
     color: rgb(201, 206, 210);
     font-size: 15px;
  }
+ .button-group > button {
+    border: #2D6A4F;
+    border-radius: 10px;
+    width: 390px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 40px;
+    background-color: #2D6A4F;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    padding: 4px;
+ }
+ .button-group > button >span {
+    margin-top: 7px;
+    color: rgb(201, 206, 210);
+    font-size: 15px;
+ }
