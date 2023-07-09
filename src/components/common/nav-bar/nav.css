@@ -9,6 +9,10 @@
     /* background-color: red;    */
 
 }
+
+.nav-bar.space-between {
+    justify-content: space-between;
+}
 .nav-bar>
 .Nav {
     color: #FFFFFF;
@@ -23,7 +27,7 @@
 
 .navigate-btn{
     display: flex;
-
+    margin-right: 25px;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;

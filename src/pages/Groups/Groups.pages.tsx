@@ -52,7 +52,7 @@ const GroupsPage = (props:any) => {
   return (
    
       <div className="groups">
-      <h1 className="g">All Groups </h1>
+      <h1 className="g">Choose Group To Evalute</h1>
         {groupData?.map((group: Group, index: number) => (
           <Link to={`/Questions?type=${group.type}&group=${group.groupName}&student=${group.students.map((s: any,ind : any) => {
             return findStudent(s);

@@ -10,12 +10,12 @@ const MyNavbar = (props: any) => {
 
   return (
     <div>
-      <Navbar className="nav-bar">
+      <Navbar className="nav-bar space-between">
 
         <div className="Nav" onClick={props.handleToggleSidebar}>   ☰</div>
 
      <div className="navigate-btn">
-          <Link to="/groups" className="nav-button">Groups</Link>
+          <Link to="/groups" className="nav-button">Evaluate Groups</Link>
           <Link to="/report" className="nav-button">Report</Link>
         </div>
 
